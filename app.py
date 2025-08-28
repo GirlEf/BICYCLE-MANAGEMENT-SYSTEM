@@ -168,6 +168,273 @@ def members():
     """Members management page"""
     return render_template('members.html')
 
+@app.route('/api/members')
+def get_members():
+    """Get all members with optional filtering"""
+    try:
+        db_manager.connect()
+        cursor = db_manager.connection.cursor()
+        
+        # Get query parameters for filtering
+        search = request.args.get('search', '').strip()
+        status = request.args.get('status', '').strip()
+        member_type = request.args.get('type', '').strip()
+        
+        # Build query
+        query = "SELECT * FROM members WHERE 1=1"
+        params = []
+        
+        if search:
+            query += " AND (ID LIKE ? OR NAME LIKE ? OR EMAIL LIKE ?)"
+            search_param = f"%{search}%"
+            params.extend([search_param, search_param, search_param])
+        
+        if status:
+            query += " AND STATUS = ?"
+            params.append(status)
+        
+        if member_type:
+            query += " AND MEMBER_TYPE = ?"
+            params.append(member_type)
+        
+        query += " ORDER BY ID"
+        
+        cursor.execute(query, params)
+        members = cursor.fetchall()
+        
+        # Get column names
+        columns = [description[0] for description in cursor.description]
+        
+        # Convert to list of dictionaries
+        member_list = []
+        for member in members:
+            member_dict = dict(zip(columns, member))
+            # Get rental count for each member
+            cursor.execute("""
+                SELECT COUNT(*) FROM rental_transactions 
+                WHERE MEMBER_ID = ? AND RETURN_DATE IS NULL
+            """, (member_dict['ID'],))
+            member_dict['ACTIVE_RENTALS'] = cursor.fetchone()[0]
+            member_list.append(member_dict)
+        
+        return jsonify({
+            'success': True,
+            'members': member_list
+        })
+        
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+    finally:
+        db_manager.close()
+
+@app.route('/api/members', methods=['POST'])
+def create_member():
+    """Create a new member"""
+    try:
+        data = request.get_json()
+        
+        # Validate required fields
+        required_fields = ['name', 'email', 'phone', 'member_type']
+        for field in required_fields:
+            if not data.get(field):
+                return jsonify({'success': False, 'message': f'{field.title()} is required'}), 400
+        
+        db_manager.connect()
+        cursor = db_manager.connection.cursor()
+        
+        # Check if email already exists
+        cursor.execute("SELECT ID FROM members WHERE EMAIL = ?", (data['email'],))
+        if cursor.fetchone():
+            return jsonify({'success': False, 'message': 'Email already exists'}), 400
+        
+        # Insert new member
+        cursor.execute("""
+            INSERT INTO members (NAME, EMAIL, PHONE, MEMBER_TYPE, STATUS, REGISTRATION_DATE)
+            VALUES (?, ?, ?, ?, 'Active', date('now'))
+        """, (data['name'], data['email'], data['phone'], data['member_type']))
+        
+        member_id = cursor.lastrowid
+        db_manager.connection.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': f'Member {data["name"]} created successfully',
+            'member_id': member_id
+        })
+        
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+    finally:
+        db_manager.close()
+
+@app.route('/api/members/<int:member_id>', methods=['PUT'])
+def update_member(member_id):
+    """Update an existing member"""
+    try:
+        data = request.get_json()
+        
+        db_manager.connect()
+        cursor = db_manager.connection.cursor()
+        
+        # Check if member exists
+        cursor.execute("SELECT ID FROM members WHERE ID = ?", (member_id,))
+        if not cursor.fetchone():
+            return jsonify({'success': False, 'message': 'Member not found'}), 404
+        
+        # Update member
+        update_fields = []
+        params = []
+        
+        if 'name' in data:
+            update_fields.append("NAME = ?")
+            params.append(data['name'])
+        
+        if 'email' in data:
+            # Check if email already exists for other members
+            cursor.execute("SELECT ID FROM members WHERE EMAIL = ? AND ID != ?", (data['email'], member_id))
+            if cursor.fetchone():
+                return jsonify({'success': False, 'message': 'Email already exists'}), 400
+            update_fields.append("EMAIL = ?")
+            params.append(data['email'])
+        
+        if 'phone' in data:
+            update_fields.append("PHONE = ?")
+            params.append(data['phone'])
+        
+        if 'member_type' in data:
+            update_fields.append("MEMBER_TYPE = ?")
+            params.append(data['member_type'])
+        
+        if 'status' in data:
+            update_fields.append("STATUS = ?")
+            params.append(data['status'])
+        
+        if update_fields:
+            params.append(member_id)
+            query = f"UPDATE members SET {', '.join(update_fields)} WHERE ID = ?"
+            cursor.execute(query, params)
+            db_manager.connection.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': 'Member updated successfully'
+        })
+        
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+    finally:
+        db_manager.close()
+
+@app.route('/api/members/<int:member_id>', methods=['DELETE'])
+def delete_member(member_id):
+    """Delete a member (soft delete by setting status to Inactive)"""
+    try:
+        db_manager.connect()
+        cursor = db_manager.connection.cursor()
+        
+        # Check if member has active rentals
+        cursor.execute("""
+            SELECT COUNT(*) FROM rental_transactions 
+            WHERE MEMBER_ID = ? AND RETURN_DATE IS NULL
+        """, (member_id,))
+        
+        active_rentals = cursor.fetchone()[0]
+        if active_rentals > 0:
+            return jsonify({
+                'success': False, 
+                'message': f'Cannot delete member with {active_rentals} active rental(s)'
+            }), 400
+        
+        # Soft delete by setting status to Inactive
+        cursor.execute("UPDATE members SET STATUS = 'Inactive' WHERE ID = ?", (member_id,))
+        db_manager.connection.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': 'Member deactivated successfully'
+        })
+        
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+    finally:
+        db_manager.close()
+
+@app.route('/api/members/<int:member_id>/rentals')
+def get_member_rentals(member_id):
+    """Get rental history for a specific member"""
+    try:
+        db_manager.connect()
+        cursor = db_manager.connection.cursor()
+        
+        cursor.execute("""
+            SELECT rt.RENTAL_DATE, rt.RETURN_DATE, b.ID, b.BRAND, b.TYPE,
+                   COALESCE(rf.LATE_FEE, 0) as late_fee,
+                   COALESCE(rf.DAMAGE_FEE, 0) as damage_fee
+            FROM rental_transactions rt
+            JOIN bicycles b ON rt.BICYCLE_ID = b.ID
+            LEFT JOIN rental_fees rf ON rt.TRANSACTION_ID = rf.TRANSACTION_ID
+            WHERE rt.MEMBER_ID = ?
+            ORDER BY rt.RENTAL_DATE DESC
+        """, (member_id,))
+        
+        rentals = cursor.fetchall()
+        
+        return jsonify({
+            'success': True,
+            'rentals': rentals
+        })
+        
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+    finally:
+        db_manager.close()
+
+@app.route('/api/members/stats')
+def get_member_stats():
+    """Get member statistics"""
+    try:
+        db_manager.connect()
+        cursor = db_manager.connection.cursor()
+        
+        # Total members
+        cursor.execute("SELECT COUNT(*) FROM members")
+        total_members = cursor.fetchone()[0]
+        
+        # Active members
+        cursor.execute("SELECT COUNT(*) FROM members WHERE STATUS = 'Active'")
+        active_members = cursor.fetchone()[0]
+        
+        # Members by type
+        cursor.execute("""
+            SELECT MEMBER_TYPE, COUNT(*) as count
+            FROM members
+            WHERE STATUS = 'Active'
+            GROUP BY MEMBER_TYPE
+        """)
+        members_by_type = cursor.fetchall()
+        
+        # Recent registrations (last 30 days)
+        cursor.execute("""
+            SELECT COUNT(*) FROM members 
+            WHERE REGISTRATION_DATE >= date('now', '-30 days')
+        """)
+        recent_registrations = cursor.fetchone()[0]
+        
+        return jsonify({
+            'success': True,
+            'stats': {
+                'total_members': total_members,
+                'active_members': active_members,
+                'members_by_type': members_by_type,
+                'recent_registrations': recent_registrations
+            }
+        })
+        
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+    finally:
+        db_manager.close()
+
 @app.route('/reports')
 def reports():
     """Reports and analytics page"""

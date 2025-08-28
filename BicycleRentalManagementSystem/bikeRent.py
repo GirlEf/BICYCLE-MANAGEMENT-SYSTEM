@@ -35,11 +35,15 @@ class RentalTransactionManager:
         """Logs a rental transaction."""
         self.db_manager.connect()
         try:
+            # Get member info for better logging
+            member_info = self.db_manager.get_member_info(member_id)
+            member_name = member_info['NAME'] if member_info else f"ID:{member_id}"
+            
             with self.db_manager.connection:
                 self.db_manager.connection.execute('''INSERT INTO rental_transactions 
                 (BICYCLE_ID, MEMBER_ID, RENTAL_DATE, RETURN_DATE) VALUES (?, ?, ?, ?)''', 
                 (bicycle_id, member_id, rental_date, expected_return_date))
-            logging.info(f"Logged rental transaction for Bicycle ID: {bicycle_id}, Member ID: {member_id}")
+            logging.info(f"Logged rental transaction for Bicycle ID: {bicycle_id}, Member: {member_name} (ID: {member_id})")
         except Exception as e:
             logging.error(f"Failed to log rental transaction: {e}")
         finally:
@@ -74,16 +78,18 @@ class BikeRentSystem:
         """Validate if a member is eligible to rent a bicycle."""
         print(f"Validating membership for Member ID: {member_id}")
 
-        if not check_membership(member_id, self.memberships):
+        # Get member info from database
+        member_info = self.db_manager.get_member_info(member_id)
+        if not member_info:
             return False, "Invalid or inactive membership."
 
         current_rentals = self.rental_manager.get_active_rentals_for_member(member_id)
-        rental_limit = get_rental_limit(member_id, self.memberships)
+        rental_limit = member_info.get('RENTAL_LIMIT', 3)
         
         if current_rentals >= rental_limit:
             return False, f"Rental limit exceeded. Limit: {rental_limit}, Current rentals: {current_rentals}."
 
-        return True, "Member validated and eligible to rent."
+        return True, f"Member {member_info['NAME']} validated and eligible to rent."
 
     def validate_bicycle(self, bicycle_id):
         """Verify if a bicycle is available for rent by ID."""

@@ -36,6 +36,9 @@ class DatabaseManager:
         with self.connection as conn:
             cursor = conn.cursor()
 
+            # Drop old members table if it exists with old structure
+            cursor.execute("DROP TABLE IF EXISTS members")
+
             # Create bicycles table
             cursor.execute('''CREATE TABLE IF NOT EXISTS bicycles (
                 ID INTEGER PRIMARY KEY,
@@ -48,25 +51,36 @@ class DatabaseManager:
                 STATUS TEXT CHECK(STATUS IN ('Available', 'Rented', 'Under Maintenance')) DEFAULT 'Available'
             )''')
 
-            # Create members table
-            cursor.execute('''CREATE TABLE IF NOT EXISTS members (
-                MemberID INTEGER PRIMARY KEY,
-                RentalLimit INTEGER NOT NULL,
-                MembershipEndDate TEXT NOT NULL
+            # Create members table with new structure
+            cursor.execute('''CREATE TABLE members (
+                ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                NAME TEXT NOT NULL,
+                EMAIL TEXT UNIQUE NOT NULL,
+                PHONE TEXT,
+                MEMBER_TYPE TEXT CHECK(MEMBER_TYPE IN ('student', 'regular', 'premium')) DEFAULT 'regular',
+                STATUS TEXT CHECK(STATUS IN ('Active', 'Inactive', 'Suspended')) DEFAULT 'Active',
+                REGISTRATION_DATE TEXT NOT NULL,
+                RENTAL_LIMIT INTEGER DEFAULT 3,
+                MEMBERSHIP_END_DATE TEXT
             )''')
 
+            # Drop old rental tables if they exist
+            cursor.execute("DROP TABLE IF EXISTS rental_fees")
+            cursor.execute("DROP TABLE IF EXISTS rental_transactions")
+
             # Create rental transactions table
-            cursor.execute('''CREATE TABLE IF NOT EXISTS rental_transactions (
+            cursor.execute('''CREATE TABLE rental_transactions (
                 TRANSACTION_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 BICYCLE_ID INTEGER NOT NULL,
                 MEMBER_ID INTEGER NOT NULL,
                 RENTAL_DATE TEXT NOT NULL,
                 RETURN_DATE TEXT,
-                FOREIGN KEY(BICYCLE_ID) REFERENCES bicycles(ID)
+                FOREIGN KEY(BICYCLE_ID) REFERENCES bicycles(ID),
+                FOREIGN KEY(MEMBER_ID) REFERENCES members(ID)
             )''')
 
             # Create rental fees table
-            cursor.execute('''CREATE TABLE IF NOT EXISTS rental_fees (
+            cursor.execute('''CREATE TABLE rental_fees (
                 TRANSACTION_ID INTEGER PRIMARY KEY,
                 LATE_FEE REAL DEFAULT 0,
                 DAMAGE_FEE REAL DEFAULT 0,
@@ -75,6 +89,114 @@ class DatabaseManager:
 
         logging.info("Database tables created or verified.")
         self.close()
+        
+        # Populate with sample data if tables are empty
+        self.populate_sample_data()
+
+    def populate_sample_data(self):
+        """Populate tables with sample data if they are empty."""
+        self.connect()
+        try:
+            cursor = self.connection.cursor()
+            
+            # Check if members table is empty
+            cursor.execute("SELECT COUNT(*) FROM members")
+            member_count = cursor.fetchone()[0]
+            
+            if member_count == 0:
+                # Insert sample members
+                sample_members = [
+                    ('John Smith', 'john.smith@email.com', '+44 20 7123 4567', 'student', 'Active', '2024-01-15', 3, '2024-12-31'),
+                    ('Sarah Johnson', 'sarah.j@email.com', '+44 20 7123 4568', 'regular', 'Active', '2024-01-20', 3, '2024-12-31'),
+                    ('Mike Wilson', 'mike.wilson@email.com', '+44 20 7123 4569', 'premium', 'Active', '2024-02-01', 5, '2024-12-31'),
+                    ('Emma Davis', 'emma.davis@email.com', '+44 20 7123 4570', 'student', 'Active', '2024-02-10', 3, '2024-12-31'),
+                    ('David Brown', 'david.brown@email.com', '+44 20 7123 4571', 'regular', 'Active', '2024-01-25', 3, '2024-12-31')
+                ]
+                
+                cursor.executemany('''INSERT INTO members 
+                    (NAME, EMAIL, PHONE, MEMBER_TYPE, STATUS, REGISTRATION_DATE, RENTAL_LIMIT, MEMBERSHIP_END_DATE)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', sample_members)
+                
+                self.connection.commit()
+                logging.info("Sample members data populated.")
+            
+            # Check if rental_transactions table is empty
+            cursor.execute("SELECT COUNT(*) FROM rental_transactions")
+            transaction_count = cursor.fetchone()[0]
+            
+            if transaction_count == 0:
+                # Insert sample rental transactions
+                sample_transactions = [
+                    (1, 1, '2024-03-01', None),  # Active rental
+                    (2, 2, '2024-03-05', '2024-03-10'),  # Completed rental
+                    (3, 3, '2024-03-08', None),  # Active rental
+                    (4, 1, '2024-02-20', '2024-02-27'),  # Completed rental
+                    (5, 4, '2024-03-12', None)  # Active rental
+                ]
+                
+                cursor.executemany('''INSERT INTO rental_transactions 
+                    (BICYCLE_ID, MEMBER_ID, RENTAL_DATE, RETURN_DATE)
+                    VALUES (?, ?, ?, ?)''', sample_transactions)
+                
+                # Insert sample rental fees
+                sample_fees = [
+                    (2, 5.00, 0.00),  # Late fee for transaction 2
+                    (4, 0.00, 15.00),  # Damage fee for transaction 4
+                ]
+                
+                cursor.executemany('''INSERT INTO rental_fees 
+                    (TRANSACTION_ID, LATE_FEE, DAMAGE_FEE)
+                    VALUES (?, ?, ?)''', sample_fees)
+                
+                self.connection.commit()
+                logging.info("Sample rental transactions and fees data populated.")
+                
+        except Exception as e:
+            logging.error(f"Error populating sample data: {e}")
+        finally:
+            self.close()
+
+    def get_member_info(self, member_id):
+        """Get member information by ID."""
+        self.connect()
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute("""
+                SELECT ID, NAME, EMAIL, PHONE, MEMBER_TYPE, STATUS, REGISTRATION_DATE, 
+                       RENTAL_LIMIT, MEMBERSHIP_END_DATE
+                FROM members 
+                WHERE ID = ? AND STATUS = 'Active'
+            """, (member_id,))
+            
+            member = cursor.fetchone()
+            if member:
+                columns = [description[0] for description in cursor.description]
+                return dict(zip(columns, member))
+            return None
+            
+        except Exception as e:
+            logging.error(f"Error getting member info: {e}")
+            return None
+        finally:
+            self.close()
+
+    def get_member_rental_count(self, member_id):
+        """Get the current number of active rentals for a member."""
+        self.connect()
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute("""
+                SELECT COUNT(*) FROM rental_transactions 
+                WHERE MEMBER_ID = ? AND RETURN_DATE IS NULL
+            """, (member_id,))
+            
+            return cursor.fetchone()[0]
+            
+        except Exception as e:
+            logging.error(f"Error getting member rental count: {e}")
+            return 0
+        finally:
+            self.close()
 
     def populate_bicycles(self, filename="Bicycle_Info.txt"):
         """Loads bicycle data from Bicycle_Info.txt into the bicycles table."""
