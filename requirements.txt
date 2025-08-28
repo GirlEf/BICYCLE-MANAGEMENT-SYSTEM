@@ -3,6 +3,10 @@ jupyter>=1.0.0
 ipywidgets>=7.6.0
 notebook>=6.4.0
 
+# Web application dependencies
+flask>=2.3.0
+flask-sqlalchemy>=3.0.0
+
 # Database and data handling
 sqlite3  # Usually comes with Python standard library
 

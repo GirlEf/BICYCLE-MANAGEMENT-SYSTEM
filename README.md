@@ -9,23 +9,42 @@ A comprehensive Python-based system for managing bicycle rentals, memberships, a
 - **Rental Operations**: Process bike rentals and returns
 - **Search & Filter**: Advanced search functionality with multiple criteria
 - **Database Management**: SQLite-based data persistence
-- **Interactive Interface**: Jupyter Notebook-based user interface
+- **Multiple Interfaces**: 
+  - **Web Application**: Modern, responsive web interface (recommended)
+  - **Jupyter Notebook**: Interactive notebook-based interface
+  - **Command Line**: Direct module execution
 - **Transaction Logging**: Comprehensive rental history tracking
 
 ## 📁 Project Structure
 
 ```
-BicycleRentalManagementSystem/
-├── database.py              # Database management and operations
-├── bikeRent.py             # Bike rental functionality
-├── bikeReturn.py           # Bike return processing
-├── bikeSearch.py           # Search and filter bicycles
-├── bikeSelect.py           # Bicycle selection interface
-├── menu.ipynb              # Main interactive interface
-├── Bicycle_Info.txt        # Sample bicycle data
-├── Rental_History.txt      # Sample rental history
-├── members.txt             # Sample member data
-└── BicycleRental.db       # SQLite database (auto-generated)
+BICYCLERENTALMANAGEMENTSYSTEM/
+├── app.py                  # Flask web application
+├── run_web.py             # Web application launcher
+├── templates/              # HTML templates for web interface
+│   ├── base.html          # Base template with navigation
+│   ├── index.html         # Dashboard page
+│   ├── search.html        # Search interface
+│   ├── rent.html          # Rental form
+│   ├── bicycles.html      # Bicycle inventory
+│   ├── returns.html       # Returns processing
+│   ├── members.html       # Member management
+│   └── reports.html       # Analytics and reports
+├── BicycleRentalManagementSystem/
+│   ├── database.py        # Database management and operations
+│   ├── bikeRent.py        # Bike rental functionality
+│   ├── bikeReturn.py      # Bike return processing
+│   ├── bikeSearch.py      # Search and filter bicycles
+│   ├── bikeSelect.py      # Bicycle selection interface
+│   ├── menu.ipynb         # Jupyter notebook interface
+│   ├── Bicycle_Info.txt   # Sample bicycle data
+│   ├── Rental_History.txt # Sample rental history
+│   ├── members.txt        # Sample member data
+│   └── BicycleRental.db   # SQLite database (auto-generated)
+├── requirements.txt        # Python dependencies
+├── setup.py               # Installation script
+├── LICENSE                # MIT license
+└── README.md              # Project documentation
 ```
 
 ## 🛠️ Installation
@@ -43,10 +62,15 @@ BicycleRentalManagementSystem/
 
 2. Install required dependencies:
    ```bash
-   pip install ipywidgets jupyter sqlite3
+   pip install -r requirements.txt
    ```
 
-3. Run the system:
+3. Run the web application (recommended):
+   ```bash
+   python run_web.py
+   ```
+   
+   Or run the Jupyter notebook interface:
    ```bash
    jupyter notebook BicycleRentalManagementSystem/menu.ipynb
    ```
@@ -57,6 +81,15 @@ BicycleRentalManagementSystem/
 1. Navigate to the project directory
 2. Run `jupyter notebook` or open `menu.ipynb` in Jupyter
 3. Execute the cells to initialize the system
+
+### Web Application (Recommended)
+1. Install web dependencies: `pip install -r requirements.txt`
+2. Run the web application: `python run_web.py`
+3. Open your browser and go to: `http://localhost:5000`
+
+### Command Line Interface
+1. Run individual modules directly: `python BicycleRentalManagementSystem/bikeRent.py`
+2. Use the search functionality: `python BicycleRentalManagementSystem/bikeSearch.py`
 
 ### Main Functions
 

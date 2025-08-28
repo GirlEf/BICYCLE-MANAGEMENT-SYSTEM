@@ -3,31 +3,23 @@ import sys
 import os
 import logging
 from datetime import datetime, timedelta
-from database import DatabaseManager, BicycleSearch
+# Conditional imports for module vs direct execution
+try:
+    from .database import DatabaseManager
+    from .bikeSearch import BicycleSearch
+except ImportError:
+    # When running directly, use absolute imports
+    from database import DatabaseManager
+    from bikeSearch import BicycleSearch
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Load membershipManager.pyc file using relative paths
-current_dir = os.path.dirname(os.path.abspath(__file__))
-membership_path = os.path.join(current_dir, "membershipManager.pyc")
-
-if os.path.exists(membership_path):
-    spec = importlib.util.spec_from_file_location("membershipManager", membership_path)
-    membershipManager = importlib.util.module_from_spec(spec)
-    sys.modules["membershipManager"] = membershipManager
-    spec.loader.exec_module(membershipManager)
-
-    # Import functions from membershipManager
-    load_memberships = membershipManager.load_memberships
-    check_membership = membershipManager.check_membership
-    get_rental_limit = membershipManager.get_rental_limit
-else:
-    # Fallback if membershipManager.pyc is not found
-    print("Warning: membershipManager.pyc not found. Some functionality may be limited.")
-    load_memberships = lambda: {}
-    check_membership = lambda member_id, memberships: True
-    get_rental_limit = lambda member_id, memberships: 3
+# Note: membershipManager.pyc is corrupted, using fallback functions
+print("Note: Using fallback membership functions. Some functionality may be limited.")
+load_memberships = lambda: {}
+check_membership = lambda member_id, memberships: True
+get_rental_limit = lambda member_id, memberships: 3
 
 # Note: Working directory should be set by the calling script if needed
 
@@ -144,6 +136,13 @@ class BikeRentSystem:
 
 # Example Usage
 if __name__ == "__main__":
+    # When running directly, use absolute imports
+    import sys
+    import os
+    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+    
+    from database import DatabaseManager
+    
     db_manager = DatabaseManager()
     db_manager.populate_bicycles()  # Load bicycle data from Bicycle_Info.txt
     

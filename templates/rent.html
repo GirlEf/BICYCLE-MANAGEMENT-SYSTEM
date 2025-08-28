@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+
+{% block title %}Rent a Bicycle - Bicycle Rental Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="fas fa-key me-2"></i>
+            Rent a Bicycle
+        </h1>
+        <p class="lead text-muted">Process bicycle rentals with member validation and availability checks</p>
+    </div>
+</div>
+
+<!-- Rental Form -->
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-edit me-2"></i>
+                    Rental Information
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="rentalForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="member_id" class="form-label">
+                                <i class="fas fa-user me-1"></i>
+                                Member ID *
+                            </label>
+                            <input type="number" class="form-control" id="member_id" name="member_id" 
+                                   required min="1" placeholder="Enter Member ID">
+                            <div class="form-text">Enter the member's unique identification number</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="bicycle_id" class="form-label">
+                                <i class="fas fa-bicycle me-1"></i>
+                                Bicycle ID *
+                            </label>
+                            <input type="number" class="form-control" id="bicycle_id" name="bicycle_id" 
+                                   required min="1" placeholder="Enter Bicycle ID">
+                            <div class="form-text">Enter the bicycle's unique identification number</div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="rental_date" class="form-label">
+                                <i class="fas fa-calendar me-1"></i>
+                                Rental Date
+                            </label>
+                            <input type="date" class="form-control" id="rental_date" name="rental_date" 
+                                   readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="expected_return" class="form-label">
+                                <i class="fas fa-calendar-check me-1"></i>
+                                Expected Return Date
+                            </label>
+                            <input type="date" class="form-control" id="expected_return" name="expected_return" 
+                                   readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <label for="notes" class="form-label">
+                                <i class="fas fa-sticky-note me-1"></i>
+                                Additional Notes
+                            </label>
+                            <textarea class="form-control" id="notes" name="notes" rows="3" 
+                                      placeholder="Any special instructions or notes for this rental..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn btn-secondary me-md-2" onclick="clearForm()">
+                            <i class="fas fa-eraser me-2"></i>
+                            Clear Form
+                        </button>
+                        <button type="submit" class="btn btn-success" id="submitBtn">
+                            <i class="fas fa-check me-2"></i>
+                            Confirm Rental
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Rental Information Panel -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Rental Details
+                </h5>
+            </div>
+            <div class="card-body">
+                <div id="rentalInfo">
+                    <div class="text-center text-muted py-3">
+                        <i class="fas fa-info-circle fa-2x mb-2"></i>
+                        <p>Enter Member ID and Bicycle ID to see rental details</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="card mt-3">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-bolt me-2"></i>
+                    Quick Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('search') }}" class="btn btn-outline-primary">
+                        <i class="fas fa-search me-2"></i>
+                        Search Bicycles
+                    </a>
+                    <a href="{{ url_for('bicycles') }}" class="btn btn-outline-info">
+                        <i class="fas fa-list me-2"></i>
+                        View All Bicycles
+                    </a>
+                    <a href="{{ url_for('members') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-users me-2"></i>
+                        Manage Members
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success/Error Messages -->
+<div id="messageContainer" class="mt-4" style="display: none;"></div>
+
+<!-- Loading Spinner -->
+<div id="loadingSpinner" class="text-center py-5" style="display: none;">
+    <div class="spinner-border text-success" role="status">
+        <span class="visually-hidden">Processing...</span>
+    </div>
+    <p class="mt-2 text-muted">Processing rental request...</p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Set current date and calculate expected return date
+    const today = new Date();
+    const expectedReturn = new Date(today);
+    expectedReturn.setDate(today.getDate() + 7); // 7 days from now
+    
+    $('#rental_date').val(today.toISOString().split('T')[0]);
+    $('#expected_return').val(expectedReturn.toISOString().split('T')[0]);
+    
+    // Handle form submission
+    $('#rentalForm').on('submit', function(e) {
+        e.preventDefault();
+        processRental();
+    });
+    
+    // Check if bicycle ID is pre-filled from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const bicycleId = urlParams.get('bicycle_id');
+    if (bicycleId) {
+        $('#bicycle_id').val(bicycleId);
+        // Trigger bicycle info lookup
+        if ($('#member_id').val()) {
+            lookupRentalInfo();
+        }
+    }
+    
+    // Auto-lookup rental info when both fields are filled
+    $('#member_id, #bicycle_id').on('input', function() {
+        if ($('#member_id').val() && $('#bicycle_id').val()) {
+            lookupRentalInfo();
+        }
+    });
+});
+
+function processRental() {
+    // Show loading spinner
+    $('#loadingSpinner').show();
+    $('#submitBtn').prop('disabled', true);
+    
+    // Collect form data
+    const formData = {
+        member_id: parseInt($('#member_id').val()),
+        bicycle_id: parseInt($('#bicycle_id').val())
+    };
+    
+    // Make API call
+    $.ajax({
+        url: '/api/rent',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(formData),
+        success: function(response) {
+            if (response.success) {
+                showMessage(response.message, 'success');
+                clearForm();
+            } else {
+                showMessage(response.error, 'danger');
+            }
+        },
+        error: function() {
+            showMessage('Failed to connect to the server. Please try again.', 'danger');
+        },
+        complete: function() {
+            $('#loadingSpinner').hide();
+            $('#submitBtn').prop('disabled', false);
+        }
+    });
+}
+
+function lookupRentalInfo() {
+    const memberId = $('#member_id').val();
+    const bicycleId = $('#bicycle_id').val();
+    
+    if (!memberId || !bicycleId) return;
+    
+    // This would typically make API calls to get member and bicycle info
+    // For now, we'll show a placeholder
+    $('#rentalInfo').html(`
+        <div class="mb-3">
+            <h6><i class="fas fa-user text-primary me-2"></i>Member Information</h6>
+            <p class="mb-1"><strong>Member ID:</strong> ${memberId}</p>
+            <p class="mb-1"><strong>Status:</strong> <span class="badge bg-success">Active</span></p>
+            <p class="mb-0"><strong>Rental Limit:</strong> 3 bicycles</p>
+        </div>
+        <div class="mb-3">
+            <h6><i class="fas fa-bicycle text-success me-2"></i>Bicycle Information</h6>
+            <p class="mb-1"><strong>Bicycle ID:</strong> ${bicycleId}</p>
+            <p class="mb-1"><strong>Status:</strong> <span class="badge bg-success">Available</span></p>
+            <p class="mb-0"><strong>Daily Rate:</strong> $15/day</p>
+        </div>
+        <div class="mb-3">
+            <h6><i class="fas fa-calculator text-warning me-2"></i>Rental Summary</h6>
+            <p class="mb-1"><strong>Duration:</strong> 7 days</p>
+            <p class="mb-1"><strong>Total Cost:</strong> $105</p>
+            <p class="mb-0"><strong>Return Date:</strong> ${$('#expected_return').val()}</p>
+        </div>
+    `);
+}
+
+function clearForm() {
+    $('#rentalForm')[0].reset();
+    $('#rental_date').val(new Date().toISOString().split('T')[0]);
+    const expectedReturn = new Date();
+    expectedReturn.setDate(expectedReturn.getDate() + 7);
+    $('#expected_return').val(expectedReturn.toISOString().split('T')[0]);
+    $('#rentalInfo').html(`
+        <div class="text-center text-muted py-3">
+            <i class="fas fa-info-circle fa-2x mb-2"></i>
+            <p>Enter Member ID and Bicycle ID to see rental details</p>
+        </div>
+    `);
+    $('#messageContainer').hide();
+}
+
+function showMessage(message, type) {
+    const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+    const icon = type === 'success' ? 'check-circle' : 'exclamation-triangle';
+    
+    $('#messageContainer').html(`
+        <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+            <i class="fas fa-${icon} me-2"></i>
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `).show();
+    
+    // Auto-hide success messages after 5 seconds
+    if (type === 'success') {
+        setTimeout(() => {
+            $('#messageContainer').fadeOut();
+        }, 5000);
+    }
+}
+</script>
+{% endblock %} 

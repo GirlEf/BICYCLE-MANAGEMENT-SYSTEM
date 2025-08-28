@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+
+{% block title %}Search Bicycles - Bicycle Rental Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="fas fa-search me-2"></i>
+            Search Bicycles
+        </h1>
+        <p class="lead text-muted">Find the perfect bicycle using our advanced search filters</p>
+    </div>
+</div>
+
+<!-- Search Form -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-filter me-2"></i>
+                    Search Criteria
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="searchForm">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="brand" class="form-label">Brand</label>
+                            <input type="text" class="form-control" id="brand" name="brand" placeholder="e.g., Bianchi, Trek">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="type" class="form-label">Type</label>
+                            <input type="text" class="form-control" id="type" name="type" placeholder="e.g., Road Bike, Mountain Bike">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" id="status" name="status">
+                                <option value="">All Statuses</option>
+                                <option value="Available">Available</option>
+                                <option value="Rented">Rented</option>
+                                <option value="Under Maintenance">Under Maintenance</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="condition" class="form-label">Condition</label>
+                            <select class="form-select" id="condition" name="condition">
+                                <option value="">All Conditions</option>
+                                <option value="New">New</option>
+                                <option value="Good">Good</option>
+                                <option value="Fair">Fair</option>
+                                <option value="Damaged">Damaged</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="min_rate" class="form-label">Minimum Rate ($/day)</label>
+                            <input type="number" class="form-control" id="min_rate" name="min_rate" min="0" placeholder="0">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="max_rate" class="form-label">Maximum Rate ($/day)</label>
+                            <input type="number" class="form-control" id="max_rate" name="max_rate" min="0" placeholder="100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="sort_by" class="form-label">Sort By</label>
+                            <select class="form-select" id="sort_by" name="sort_by">
+                                <option value="">No Sorting</option>
+                                <option value="BRAND">Brand</option>
+                                <option value="TYPE">Type</option>
+                                <option value="RENTAL_RATE">Rental Rate</option>
+                                <option value="CONDITION">Condition</option>
+                            </select>
+                        </div>
+                        <div class="col-md-8 mb-3 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary me-2">
+                                <i class="fas fa-search me-2"></i>
+                                Search
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="clearForm">
+                                <i class="fas fa-eraser me-2"></i>
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search Results -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-list me-2"></i>
+                    Search Results
+                </h5>
+                <span class="badge bg-light text-dark" id="resultCount">0 results</span>
+            </div>
+            <div class="card-body">
+                <div id="searchResults">
+                    <div class="text-center text-muted py-5">
+                        <i class="fas fa-search fa-3x mb-3"></i>
+                        <p>Use the search form above to find bicycles</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Spinner (Hidden by default) -->
+<div id="loadingSpinner" class="text-center py-5" style="display: none;">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2 text-muted">Searching bicycles...</p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Handle form submission
+    $('#searchForm').on('submit', function(e) {
+        e.preventDefault();
+        performSearch();
+    });
+    
+    // Handle clear form
+    $('#clearForm').on('click', function() {
+        $('#searchForm')[0].reset();
+        $('#searchResults').html(`
+            <div class="text-center text-muted py-5">
+                <i class="fas fa-search fa-3x mb-3"></i>
+                <p>Use the search form above to find bicycles</p>
+            </div>
+        `);
+        $('#resultCount').text('0 results');
+    });
+});
+
+function performSearch() {
+    // Show loading spinner
+    $('#loadingSpinner').show();
+    $('#searchResults').hide();
+    
+    // Collect form data
+    const formData = {
+        brand: $('#brand').val(),
+        type: $('#type').val(),
+        status: $('#status').val(),
+        condition: $('#condition').val(),
+        min_rate: $('#min_rate').val() || null,
+        max_rate: $('#max_rate').val() || null,
+        sort_by: $('#sort_by').val()
+    };
+    
+    // Make API call
+    $.ajax({
+        url: '/api/search',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(formData),
+        success: function(response) {
+            if (response.success) {
+                displayResults(response.bicycles);
+            } else {
+                showError(response.error || 'An error occurred during search');
+            }
+        },
+        error: function() {
+            showError('Failed to connect to the server. Please try again.');
+        },
+        complete: function() {
+            $('#loadingSpinner').hide();
+            $('#searchResults').show();
+        }
+    });
+}
+
+function displayResults(bicycles) {
+    const resultCount = bicycles.length;
+    $('#resultCount').text(`${resultCount} result${resultCount !== 1 ? 's' : ''}`);
+    
+    if (resultCount === 0) {
+        $('#searchResults').html(`
+            <div class="text-center text-muted py-5">
+                <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+                <p>No bicycles found matching your criteria</p>
+                <small>Try adjusting your search filters</small>
+            </div>
+        `);
+        return;
+    }
+    
+    let resultsHtml = '<div class="table-responsive"><table class="table table-hover">';
+    resultsHtml += `
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Type</th>
+                <th>Frame Size</th>
+                <th>Rental Rate</th>
+                <th>Condition</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+    `;
+    
+    bicycles.forEach(function(bike) {
+        const statusClass = getStatusClass(bike.STATUS);
+        const conditionClass = getConditionClass(bike.CONDITION);
+        
+        resultsHtml += `
+            <tr>
+                <td><strong>#${bike.ID}</strong></td>
+                <td>${bike.BRAND}</td>
+                <td>${bike.TYPE}</td>
+                <td>${bike.FRAME_SIZE}</td>
+                <td><span class="badge bg-info">${bike.RENTAL_RATE}</span></td>
+                <td><span class="badge ${conditionClass}">${bike.CONDITION}</span></td>
+                <td><span class="badge ${statusClass}">${bike.STATUS}</span></td>
+                <td>
+                    ${bike.STATUS === 'Available' ? 
+                        `<button class="btn btn-sm btn-success" onclick="rentBicycle(${bike.ID})">
+                            <i class="fas fa-key me-1"></i>Rent
+                        </button>` : 
+                        `<button class="btn btn-sm btn-secondary" disabled>
+                            <i class="fas fa-ban me-1"></i>Not Available
+                        </button>`
+                    }
+                </td>
+            </tr>
+        `;
+    });
+    
+    resultsHtml += '</tbody></table></div>';
+    $('#searchResults').html(resultsHtml);
+}
+
+function getStatusClass(status) {
+    switch(status.toLowerCase()) {
+        case 'available': return 'bg-success';
+        case 'rented': return 'bg-warning';
+        case 'under maintenance': return 'bg-danger';
+        default: return 'bg-secondary';
+    }
+}
+
+function getConditionClass(condition) {
+    switch(condition.toLowerCase()) {
+        case 'new': return 'bg-success';
+        case 'good': return 'bg-info';
+        case 'fair': return 'bg-warning';
+        case 'damaged': return 'bg-danger';
+        default: return 'bg-secondary';
+    }
+}
+
+function showError(message) {
+    $('#searchResults').html(`
+        <div class="alert alert-danger" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            ${message}
+        </div>
+    `);
+    $('#resultCount').text('0 results');
+}
+
+function rentBicycle(bicycleId) {
+    // Redirect to rent page with bicycle ID
+    window.location.href = `/rent?bicycle_id=${bicycleId}`;
+}
+</script>
+{% endblock %} 

@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Bicycle Rental Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="fas fa-tachometer-alt me-2"></i>
+            Dashboard
+        </h1>
+        <p class="lead text-muted">Welcome to BikeRent Pro - Your comprehensive bicycle rental management solution</p>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="dashboard-stats">
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <i class="fas fa-bicycle fa-3x text-primary mb-3"></i>
+                <div class="stat-number" id="total-bikes">-</div>
+                <div class="stat-label">Total Bicycles</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                <div class="stat-number" id="available-bikes">-</div>
+                <div class="stat-label">Available</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <i class="fas fa-key fa-3x text-warning mb-3"></i>
+                <div class="stat-number" id="rented-bikes">-</div>
+                <div class="stat-label">Currently Rented</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <i class="fas fa-tools fa-3x text-danger mb-3"></i>
+                <div class="stat-number" id="maintenance-bikes">-</div>
+                <div class="stat-label">Under Maintenance</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-bolt me-2"></i>
+                    Quick Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <a href="{{ url_for('rent') }}" class="btn btn-success w-100">
+                            <i class="fas fa-key me-2"></i>
+                            Rent a Bicycle
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="{{ url_for('search') }}" class="btn btn-primary w-100">
+                            <i class="fas fa-search me-2"></i>
+                            Search Bicycles
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="{{ url_for('returns') }}" class="btn btn-warning w-100">
+                            <i class="fas fa-undo me-2"></i>
+                            Process Returns
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="{{ url_for('bicycles') }}" class="btn btn-info w-100">
+                            <i class="fas fa-list me-2"></i>
+                            View All Bicycles
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activity -->
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-clock me-2"></i>
+                    Recent Rentals
+                </h5>
+            </div>
+            <div class="card-body">
+                <div id="recent-rentals">
+                    <p class="text-muted">Loading recent rentals...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-line me-2"></i>
+                    System Status
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-success rounded-circle p-2 me-3">
+                                <i class="fas fa-database text-white"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold">Database</div>
+                                <small class="text-success">Connected</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-success rounded-circle p-2 me-3">
+                                <i class="fas fa-server text-white"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold">System</div>
+                                <small class="text-success">Online</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-success rounded-circle p-2 me-3">
+                                <i class="fas fa-users text-white"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold">Members</div>
+                                <small class="text-success">Active</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-success rounded-circle p-2 me-3">
+                                <i class="fas fa-shield-alt text-white"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold">Security</div>
+                                <small class="text-success">Protected</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Overview -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-star me-2"></i>
+                    System Features
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="text-center">
+                            <i class="fas fa-search fa-2x text-primary mb-2"></i>
+                            <h6>Advanced Search</h6>
+                            <p class="text-muted small">Find bicycles by brand, type, condition, and more</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="text-center">
+                            <i class="fas fa-key fa-2x text-success mb-2"></i>
+                            <h6>Easy Rentals</h6>
+                            <p class="text-muted small">Quick and secure bicycle rental processing</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="text-center">
+                            <i class="fas fa-chart-bar fa-2x text-warning mb-2"></i>
+                            <h6>Analytics</h6>
+                            <p class="text-muted small">Comprehensive reports and insights</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Load dashboard statistics
+    loadDashboardStats();
+    
+    // Load recent rentals
+    loadRecentRentals();
+});
+
+function loadDashboardStats() {
+    // This would typically make an API call to get real-time stats
+    // For now, we'll simulate with sample data
+    $('#total-bikes').text('24');
+    $('#available-bikes').text('18');
+    $('#rented-bikes').text('4');
+    $('#maintenance-bikes').text('2');
+}
+
+function loadRecentRentals() {
+    // This would typically make an API call to get recent rentals
+    // For now, we'll show sample data
+    $('#recent-rentals').html(`
+        <div class="list-group list-group-flush">
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>Bicycle #500</strong><br>
+                    <small class="text-muted">Rented to Member #123</small>
+                </div>
+                <span class="badge bg-success">Today</span>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>Bicycle #501</strong><br>
+                    <small class="text-muted">Rented to Member #124</small>
+                </div>
+                <span class="badge bg-info">Yesterday</span>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>Bicycle #502</strong><br>
+                    <small class="text-muted">Rented to Member #125</small>
+                </div>
+                <span class="badge bg-secondary">2 days ago</span>
+            </div>
+        </div>
+    `);
+}
+</script>
+{% endblock %} 

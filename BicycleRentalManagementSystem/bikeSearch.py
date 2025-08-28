@@ -1,11 +1,18 @@
 import sqlite3  # Import the sqlite3 module
-from database import DatabaseManager
+# Conditional imports for module vs direct execution
+try:
+    from .database import DatabaseManager
+except ImportError:
+    # When running directly, use absolute imports
+    from database import DatabaseManager
 
-class BicycleSearch(DatabaseManager):
+class BicycleSearch:
+    def __init__(self, db_manager):
+        self.db_manager = db_manager
     def search_bicycles(self, brand=None, bike_type=None, status="available", condition=None, min_rate=None, max_rate=None, sort_by=None):
         """Searches for bicycles based on specified criteria."""
-        self.connect()
-        cursor = self.connection.cursor()
+        self.db_manager.connect()
+        cursor = self.db_manager.connection.cursor()
         
         # Base query
         query = "SELECT * FROM bicycles WHERE LOWER(STATUS) = LOWER(?)"
@@ -39,7 +46,7 @@ class BicycleSearch(DatabaseManager):
             results = cursor.fetchall()
         except sqlite3.OperationalError as e:
             print(f"Database error: {e}")
-            self.close()
+            self.db_manager.close()
             return
 
         # Display results or suggest similar bicycles
@@ -50,7 +57,7 @@ class BicycleSearch(DatabaseManager):
         else:
             print("No exact matches found.")
             self.suggest_similar_bicycles(cursor, brand, bike_type, status, condition)  # Suggest similar bicycles
-        self.close()
+        self.db_manager.close()
 
     def suggest_similar_bicycles(self, cursor, brand, bike_type, status, condition):
         """Suggests similar bicycles by relaxing search criteria."""
@@ -130,7 +137,50 @@ class BicycleSearch(DatabaseManager):
             sort_by=sort_by or None
         )
 
+    def get_bicycle_by_id(self, bicycle_id):
+        """Get a specific bicycle by its ID."""
+        self.db_manager.connect()
+        try:
+            cursor = self.db_manager.connection.cursor()
+            cursor.execute("SELECT * FROM bicycles WHERE ID = ?", (bicycle_id,))
+            result = cursor.fetchone()
+            
+            if result:
+                # Convert to dictionary format for easier access
+                columns = [description[0] for description in cursor.description]
+                bicycle_dict = dict(zip(columns, result))
+                return bicycle_dict
+            else:
+                return None
+        except Exception as e:
+            print(f"Error retrieving bicycle {bicycle_id}: {e}")
+            return None
+        finally:
+            self.db_manager.close()
+
+    def list_all_bicycles(self):
+        """List all bicycles in the database."""
+        self.db_manager.connect()
+        try:
+            cursor = self.db_manager.connection.cursor()
+            cursor.execute("SELECT * FROM bicycles ORDER BY ID")
+            results = cursor.fetchall()
+            
+            bicycles = []
+            for row in results:
+                columns = [description[0] for description in cursor.description]
+                bicycle_dict = dict(zip(columns, row))
+                bicycles.append(bicycle_dict)
+            
+            return bicycles
+        except Exception as e:
+            print(f"Error listing bicycles: {e}")
+            return []
+        finally:
+            self.db_manager.close()
+
 # Run the program
 if __name__ == "__main__":
-    search = BicycleSearch()
+    db_manager = DatabaseManager()
+    search = BicycleSearch(db_manager)
     search.get_user_input_and_search()

@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+
+{% block title %}All Bicycles - Bicycle Rental Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="fas fa-bicycle me-2"></i>
+            All Bicycles
+        </h1>
+        <p class="lead text-muted">Complete inventory overview of all bicycles in the system</p>
+    </div>
+</div>
+
+<!-- Statistics Summary -->
+<div class="row mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-bicycle fa-2x text-primary mb-2"></i>
+                <h4 class="card-title">{{ bicycles|length }}</h4>
+                <p class="card-text text-muted">Total Bicycles</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
+                <h4 class="card-title" id="available-count">-</h4>
+                <p class="card-text text-muted">Available</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-key fa-2x text-warning mb-2"></i>
+                <h4 class="card-title" id="rented-count">-</h4>
+                <p class="card-text text-muted">Currently Rented</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-tools fa-2x text-danger mb-2"></i>
+                <h4 class="card-title" id="maintenance-count">-</h4>
+                <p class="card-text text-muted">Under Maintenance</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filters and Actions -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-filter me-2"></i>
+                    Filters & Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="statusFilter" class="form-label">Filter by Status</label>
+                        <select class="form-select" id="statusFilter">
+                            <option value="">All Statuses</option>
+                            <option value="Available">Available</option>
+                            <option value="Rented">Rented</option>
+                            <option value="Under Maintenance">Under Maintenance</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="conditionFilter" class="form-label">Filter by Condition</label>
+                        <select class="form-select" id="conditionFilter">
+                            <option value="">All Conditions</option>
+                            <option value="New">New</option>
+                            <option value="Good">Good</option>
+                            <option value="Fair">Fair</option>
+                            <option value="Damaged">Damaged</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="searchInput" class="form-label">Search</label>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search bicycles...">
+                    </div>
+                    <div class="col-md-3 mb-3 d-flex align-items-end">
+                        <div class="d-grid gap-2 w-100">
+                            <a href="{{ url_for('search') }}" class="btn btn-outline-primary">
+                                <i class="fas fa-search me-2"></i>
+                                Advanced Search
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bicycles Table -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-list me-2"></i>
+                    Bicycle Inventory
+                </h5>
+                <span class="badge bg-light text-dark" id="displayCount">{{ bicycles|length }} bicycles</span>
+            </div>
+            <div class="card-body">
+                {% if bicycles %}
+                <div class="table-responsive">
+                    <table class="table table-hover" id="bicyclesTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Brand</th>
+                                <th>Type</th>
+                                <th>Frame Size</th>
+                                <th>Rental Rate</th>
+                                <th>Purchase Date</th>
+                                <th>Condition</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bicycle in bicycles %}
+                            <tr class="bicycle-row" 
+                                data-status="{{ bicycle.STATUS }}" 
+                                data-condition="{{ bicycle.CONDITION }}"
+                                data-brand="{{ bicycle.BRAND }}"
+                                data-type="{{ bicycle.TYPE }}">
+                                <td><strong>#{{ bicycle.ID }}</strong></td>
+                                <td>{{ bicycle.BRAND }}</td>
+                                <td>{{ bicycle.TYPE }}</td>
+                                <td>{{ bicycle.FRAME_SIZE }}</td>
+                                <td><span class="badge bg-info">{{ bicycle.RENTAL_RATE }}</span></td>
+                                <td>{{ bicycle.PURCHASE_DATE }}</td>
+                                <td>
+                                    <span class="badge" id="condition-{{ bicycle.ID }}">
+                                        {{ bicycle.CONDITION }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge" id="status-{{ bicycle.ID }}">
+                                        {{ bicycle.STATUS }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if bicycle.STATUS == 'Available' %}
+                                    <a href="{{ url_for('rent', bicycle_id=bicycle.ID) }}" class="btn btn-sm btn-success">
+                                        <i class="fas fa-key me-1"></i>Rent
+                                    </a>
+                                    {% else %}
+                                    <button class="btn btn-sm btn-secondary" disabled>
+                                        <i class="fas fa-ban me-1"></i>Not Available
+                                    </button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center text-muted py-5">
+                    <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+                    <p>No bicycles found in the system</p>
+                    <small>Please check your database connection or add some bicycles</small>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Apply badge classes
+    applyBadgeClasses();
+    
+    // Calculate and display statistics
+    updateStatistics();
+    
+    // Handle filters
+    $('#statusFilter, #conditionFilter').on('change', filterBicycles);
+    $('#searchInput').on('input', filterBicycles);
+});
+
+function applyBadgeClasses() {
+    $('.bicycle-row').each(function() {
+        const row = $(this);
+        const status = row.data('status');
+        const condition = row.data('condition');
+        const bicycleId = row.find('td:first strong').text().replace('#', '');
+        
+        // Apply status badge class
+        const statusBadge = $(`#status-${bicycleId}`);
+        statusBadge.addClass(getStatusClass(status));
+        
+        // Apply condition badge class
+        const conditionBadge = $(`#condition-${bicycleId}`);
+        conditionBadge.addClass(getConditionClass(condition));
+    });
+}
+function updateStatistics() {
+    // const totalBikes is not needed here, as we count visible rows dynamically
+    let availableCount = 0;
+    let rentedCount = 0;
+    let maintenanceCount = 0;
+    $('.bicycle-row').each(function() {
+        const status = $(this).data('status');
+        switch(status) {
+            case 'Available':
+                availableCount++;
+                break;
+            case 'Rented':
+                rentedCount++;
+                break;
+            case 'Under Maintenance':
+                maintenanceCount++;
+                break;
+        }
+    });
+    
+    $('#available-count').text(availableCount);
+    $('#rented-count').text(rentedCount);
+    $('#maintenance-count').text(maintenanceCount);
+}
+
+function filterBicycles() {
+    const statusFilter = $('#statusFilter').val();
+    const conditionFilter = $('#conditionFilter').val();
+    const searchTerm = $('#searchInput').val().toLowerCase();
+    
+    let visibleCount = 0;
+    
+    $('.bicycle-row').each(function() {
+        const row = $(this);
+        const status = row.data('status');
+        const condition = row.data('condition');
+        const brand = row.data('brand').toLowerCase();
+        const type = row.data('type').toLowerCase();
+        
+        let showRow = true;
+        
+        // Status filter
+        if (statusFilter && status !== statusFilter) {
+            showRow = false;
+        }
+        
+        // Condition filter
+        if (conditionFilter && condition !== conditionFilter) {
+            showRow = false;
+        }
+        
+        // Search filter
+        if (searchTerm && !brand.includes(searchTerm) && !type.includes(searchTerm)) {
+            showRow = false;
+        }
+        
+        if (showRow) {
+            row.show();
+            visibleCount++;
+        } else {
+            row.hide();
+        }
+    });
+    
+    $('#displayCount').text(`${visibleCount} bicycles`);
+}
+
+// Helper functions for Jinja2 templates
+function getStatusClass(status) {
+    switch(status.toLowerCase()) {
+        case 'available': return 'bg-success';
+        case 'rented': return 'bg-warning';
+        case 'under maintenance': return 'bg-danger';
+        default: return 'bg-secondary';
+    }
+}
+
+function getConditionClass(condition) {
+    switch(condition.toLowerCase()) {
+        case 'new': return 'bg-success';
+        case 'good': return 'bg-info';
+        case 'fair': return 'bg-warning';
+        case 'damaged': return 'bg-danger';
+        default: return 'bg-secondary';
+    }
+}
+</script>
+{% endblock %} 
