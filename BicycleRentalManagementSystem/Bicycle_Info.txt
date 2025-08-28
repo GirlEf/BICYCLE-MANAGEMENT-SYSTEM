@@ -1,0 +1,501 @@
+ID|Brand|Type|Frame Size|Rental Rate|Purchase Date|Condition|Status
+1|Merida|Hybrid Bike|Large|25/day; 125/week|19/10/2024|Fair|Available
+2|Merida|Gravel Bike|Small|20/day; 100/week|24/09/2020|Fair|Under Maintenance
+3|Specialized|Gravel Bike|Large|25/day; 125/week|16/10/2021|Fair|Available
+4|Santa Cruz|Electric Bike|Small|Missing|22/11/2019|Damaged|Rented
+5|Merida|Electric Bike|Small|25/day; 125/week|26/04/2020|Damaged|Rented
+6|Trek|Road Bike|Small|10/day; 50/week|18/05/2023|New|Available
+7|Santa Cruz|Road Bike|Large|30/day; 150/week|08/03/2019|Fair|Under Maintenance
+8|GT|Electric Bike|Medium|30/day; 150/week|24/01/2020|Damaged|Rented
+9|Cannondale|Gravel Bike|Medium|10/day; 50/week|10/06/2024|Fair|Rented
+10|Santa Cruz|Electric Bike|Small|Missing|30/05/2019|Good|Rented
+11|Scott|Electric Bike|Small|25/day; 125/week|01/11/2020|New|Available
+12|Bianchi|Road Bike|Large|30/day; 150/week|07/01/2022|Fair|Available
+13|Bianchi|Hybrid Bike|Medium|20/day; 100/week|13/02/2019|New|Rented
+14|Merida|Gravel Bike|Medium|20/day; 100/week|19/05/2023|Fair|Rented
+15|Bianchi|Hybrid Bike|Large|10/day; 50/week|17/06/2021|Fair|Available
+16|Norco|Gravel Bike|Small|10/day; 50/week|27/08/2023|New|Available
+17|Norco|Road Bike|Large|20/day; 100/week|21/08/2022|Fair|Rented
+18|GT|Electric Bike|Medium|30/day; 150/week|17/08/2022|Damaged|Under Maintenance
+19|Giant|Electric Bike|Medium|10/day; 50/week|28/05/2021|Good|Under Maintenance
+20|Bianchi|Road Bike|Small|Missing|31/10/2023|Damaged|Available
+21|Bianchi|Electric Bike|Small|20/day; 100/week|16/09/2024|Good|Under Maintenance
+22|Giant|Mountain Bike|Large|10/day; 50/week|21/05/2019|Good|Available
+23|Santa Cruz|Mountain Bike|Large|30/day; 150/week|26/01/2020|Fair|Under Maintenance
+24|Cannondale|Electric Bike|Large|20/day; 100/week|06/09/2023|Good|Rented
+25|Scott|Mountain Bike|Medium|15/day; 75/week|03/09/2021|New|Available
+26|Trek|BMX|Small|25/day; 125/week|10/07/2022|New|Under Maintenance
+27|Specialized|Hybrid Bike|Large|15/day; 75/week|03/06/2023|Damaged|Rented
+28|GT|Road Bike|Medium|10/day; 50/week|01/08/2022|Fair|Available
+29|Merida|Electric Bike|Small|20/day; 100/week|23/11/2020|New|Rented
+30|Cannondale|Road Bike|Small|25/day; 125/week|10/11/2019|Fair|Available
+31|Specialized|Gravel Bike|Small|20/day; 100/week|08/05/2020|New|Rented
+32|GT|Gravel Bike|Medium|20/day; 100/week|01/11/2024|New|Under Maintenance
+33|Specialized|Mountain Bike|Medium|25/day; 125/week|05/01/2024|Damaged|Under Maintenance
+34|Cannondale|Mountain Bike|Medium|15/day; 75/week|06/08/2022|Fair|Rented
+35|Santa Cruz|Electric Bike|Large|15/day; 75/week|18/08/2023|New|Available
+36|Cannondale|Gravel Bike|Medium|20/day; 100/week|21/05/2024|Good|Under Maintenance
+37|Merida|Electric Bike|Large|10/day; 50/week|25/06/2023|Damaged|Available
+38|Cannondale|Mountain Bike|Medium|25/day; 125/week|12/06/2019|Fair|Rented
+39|Merida|BMX|Small|10/day; 50/week|13/06/2021|New|Available
+40|Cannondale|Gravel Bike|Medium|20/day; 100/week|15/08/2021|New|Rented
+41|Cannondale|Mountain Bike|Large|10/day; 50/week|07/06/2019|Damaged|Under Maintenance
+42|Trek|Road Bike|Small|25/day; 125/week|23/10/2022|Damaged|Available
+43|Bianchi|Hybrid Bike|Large|30/day; 150/week|25/02/2021|New|Rented
+44|Trek|BMX|Medium|20/day; 100/week|21/06/2020|Fair|Rented
+45|Giant|BMX|Large|15/day; 75/week|05/09/2020|Good|Rented
+46|GT|Mountain Bike|Small|15/day; 75/week|02/07/2024|Damaged|Under Maintenance
+47|Giant|Road Bike|Medium|10/day; 50/week|18/01/2024|Fair|Available
+48|Merida|Mountain Bike|Medium|30/day; 150/week|07/10/2019|Good|Available
+49|Merida|Gravel Bike|Small|15/day; 75/week|16/10/2021|Good|Rented
+50|Norco|Road Bike|Large|30/day; 150/week|18/09/2021|Good|Available
+51|Giant|Gravel Bike|Medium|Missing|21/01/2023|Damaged|Available
+52|Merida|Gravel Bike|Medium|15/day; 75/week|18/09/2022|Good|Under Maintenance
+53|Trek|Road Bike|Large|10/day; 50/week|03/09/2023|Damaged|Under Maintenance
+54|Merida|Road Bike|Small|10/day; 50/week|17/09/2023|New|Available
+55|Specialized|Road Bike|Medium|20/day; 100/week|17/04/2020|Damaged|Under Maintenance
+56|Santa Cruz|Gravel Bike|Medium|10/day; 50/week|23/02/2022|Fair|Rented
+57|Santa Cruz|Road Bike|Medium|30/day; 150/week|13/09/2023|Fair|Under Maintenance
+58|Norco|BMX|Medium|10/day; 50/week|29/08/2023|New|Under Maintenance
+59|Bianchi|Electric Bike|Large|Missing|16/05/2022|Damaged|Under Maintenance
+60|Trek|Mountain Bike|Small|Missing|31/01/2020|New|Rented
+61|Bianchi|Hybrid Bike|Small|15/day; 75/week|27/01/2021|Good|Under Maintenance
+62|Giant|BMX|Small|Missing|28/03/2019|Damaged|Available
+63|Cannondale|Hybrid Bike|Medium|10/day; 50/week|05/03/2021|New|Available
+64|GT|Electric Bike|Small|20/day; 100/week|25/04/2022|Damaged|Under Maintenance
+65|Scott|Road Bike|Large|10/day; 50/week|15/12/2024|New|Available
+66|Norco|Road Bike|Small|Missing|14/08/2020|New|Under Maintenance
+67|Norco|Electric Bike|Medium|20/day; 100/week|15/08/2022|Damaged|Under Maintenance
+68|Trek|BMX|Medium|25/day; 125/week|03/01/2023|Fair|Rented
+69|GT|Electric Bike|Medium|10/day; 50/week|17/04/2019|Fair|Rented
+70|Bianchi|Gravel Bike|Large|30/day; 150/week|01/11/2024|Good|Under Maintenance
+71|Scott|Gravel Bike|Large|25/day; 125/week|08/02/2021|Damaged|Rented
+72|Specialized|Electric Bike|Medium|15/day; 75/week|09/10/2023|Damaged|Under Maintenance
+73|Bianchi|BMX|Large|30/day; 150/week|25/06/2020|Fair|Under Maintenance
+74|Scott|Mountain Bike|Large|10/day; 50/week|18/11/2020|New|Available
+75|Specialized|Hybrid Bike|Medium|15/day; 75/week|19/09/2019|New|Rented
+76|Trek|Mountain Bike|Large|10/day; 50/week|06/02/2020|Damaged|Under Maintenance
+77|Merida|BMX|Medium|25/day; 125/week|18/03/2019|Damaged|Available
+78|Specialized|Mountain Bike|Medium|25/day; 125/week|29/07/2022|Damaged|Available
+79|Cannondale|Gravel Bike|Small|30/day; 150/week|28/10/2022|Fair|Under Maintenance
+80|Trek|Hybrid Bike|Small|15/day; 75/week|08/02/2020|Fair|Available
+81|Scott|BMX|Large|15/day; 75/week|06/06/2020|New|Rented
+82|Norco|Hybrid Bike|Large|15/day; 75/week|10/07/2021|Fair|Available
+83|Merida|Road Bike|Large|25/day; 125/week|14/07/2020|Fair|Under Maintenance
+84|Giant|Road Bike|Large|25/day; 125/week|08/07/2024|Good|Available
+85|Bianchi|Gravel Bike|Small|20/day; 100/week|22/06/2024|Fair|Under Maintenance
+86|Santa Cruz|Electric Bike|Small|15/day; 75/week|23/03/2023|Good|Available
+87|Santa Cruz|BMX|Large|25/day; 125/week|18/07/2021|Good|Rented
+88|Giant|Mountain Bike|Small|20/day; 100/week|06/05/2024|New|Available
+89|Bianchi|BMX|Medium|10/day; 50/week|16/07/2019|Good|Available
+90|GT|BMX|Medium|15/day; 75/week|19/06/2021|Fair|Available
+91|Merida|Mountain Bike|Large|20/day; 100/week|22/11/2024|Damaged|Available
+92|Cannondale|Hybrid Bike|Large|15/day; 75/week|26/05/2020|Good|Rented
+93|Trek|Mountain Bike|Large|20/day; 100/week|17/01/2019|Fair|Under Maintenance
+94|Merida|Electric Bike|Medium|Missing|28/12/2020|Damaged|Under Maintenance
+95|GT|Hybrid Bike|Medium|15/day; 75/week|04/09/2020|New|Rented
+96|Santa Cruz|Hybrid Bike|Large|15/day; 75/week|14/02/2020|New|Under Maintenance
+97|Giant|Gravel Bike|Small|15/day; 75/week|13/01/2024|Damaged|Available
+98|Giant|Mountain Bike|Large|15/day; 75/week|02/03/2020|Fair|Rented
+99|GT|Electric Bike|Large|30/day; 150/week|10/08/2019|Fair|Under Maintenance
+100|Norco|Mountain Bike|Medium|15/day; 75/week|07/01/2021|Fair|Under Maintenance
+101|Cannondale|Hybrid Bike|Large|25/day; 125/week|20/02/2024|Fair|Rented
+102|Merida|Gravel Bike|Medium|15/day; 75/week|03/09/2019|New|Available
+103|Trek|Road Bike|Medium|20/day; 100/week|19/06/2020|Damaged|Under Maintenance
+104|Trek|Mountain Bike|Large|15/day; 75/week|30/06/2020|New|Under Maintenance
+105|Scott|BMX|Small|10/day; 50/week|21/02/2021|Good|Rented
+106|Merida|BMX|Medium|10/day; 50/week|16/01/2024|New|Available
+107|Merida|Hybrid Bike|Small|15/day; 75/week|17/02/2022|Good|Rented
+108|Giant|Road Bike|Medium|15/day; 75/week|06/01/2023|New|Rented
+109|Cannondale|Mountain Bike|Medium|15/day; 75/week|20/09/2019|Damaged|Under Maintenance
+110|Scott|Road Bike|Large|30/day; 150/week|07/01/2023|Good|Rented
+111|Giant|BMX|Small|10/day; 50/week|26/07/2019|New|Under Maintenance
+112|Trek|BMX|Large|20/day; 100/week|01/08/2023|Fair|Under Maintenance
+113|Bianchi|Hybrid Bike|Small|10/day; 50/week|08/03/2024|New|Under Maintenance
+114|Specialized|BMX|Large|30/day; 150/week|08/11/2024|New|Under Maintenance
+115|GT|Road Bike|Large|15/day; 75/week|09/09/2023|Good|Available
+116|Merida|Road Bike|Large|25/day; 125/week|03/11/2022|New|Under Maintenance
+117|Bianchi|Road Bike|Medium|30/day; 150/week|09/09/2024|Fair|Under Maintenance
+118|Cannondale|Electric Bike|Small|15/day; 75/week|17/03/2024|Damaged|Rented
+119|Scott|BMX|Small|30/day; 150/week|09/08/2020|New|Under Maintenance
+120|Cannondale|Electric Bike|Small|25/day; 125/week|04/06/2021|Fair|Under Maintenance
+121|Bianchi|Electric Bike|Medium|10/day; 50/week|16/08/2024|Fair|Rented
+122|Giant|Hybrid Bike|Small|20/day; 100/week|02/08/2022|Fair|Under Maintenance
+123|Trek|Electric Bike|Large|10/day; 50/week|03/12/2020|Good|Under Maintenance
+124|Scott|Electric Bike|Small|30/day; 150/week|20/04/2019|New|Available
+125|GT|Mountain Bike|Large|20/day; 100/week|14/04/2019|Good|Under Maintenance
+126|Trek|Electric Bike|Medium|20/day; 100/week|09/09/2021|Fair|Available
+127|Santa Cruz|BMX|Medium|25/day; 125/week|05/01/2019|Fair|Rented
+128|Merida|Road Bike|Large|Missing|05/07/2019|Good|Available
+129|Trek|Hybrid Bike|Medium|20/day; 100/week|23/05/2022|Damaged|Rented
+130|Trek|Gravel Bike|Large|30/day; 150/week|29/12/2022|Fair|Rented
+131|GT|Road Bike|Small|15/day; 75/week|10/05/2020|Damaged|Under Maintenance
+132|Santa Cruz|BMX|Large|30/day; 150/week|26/07/2019|Good|Available
+133|Santa Cruz|Hybrid Bike|Medium|30/day; 150/week|27/10/2022|Fair|Rented
+134|Trek|Mountain Bike|Small|30/day; 150/week|14/09/2023|Damaged|Available
+135|Norco|Road Bike|Large|20/day; 100/week|23/11/2019|New|Rented
+136|Specialized|Road Bike|Large|25/day; 125/week|12/01/2024|New|Under Maintenance
+137|Giant|Road Bike|Medium|15/day; 75/week|12/02/2023|New|Under Maintenance
+138|Specialized|Mountain Bike|Medium|25/day; 125/week|08/11/2022|Damaged|Rented
+139|Bianchi|Road Bike|Medium|15/day; 75/week|30/04/2024|New|Under Maintenance
+140|Norco|Electric Bike|Medium|20/day; 100/week|04/04/2019|Fair|Available
+141|Scott|Hybrid Bike|Medium|30/day; 150/week|10/10/2019|New|Available
+142|Specialized|Road Bike|Medium|15/day; 75/week|18/03/2021|Good|Under Maintenance
+143|Specialized|BMX|Small|30/day; 150/week|25/02/2023|New|Under Maintenance
+144|GT|Gravel Bike|Medium|10/day; 50/week|04/05/2024|Fair|Rented
+145|Giant|Electric Bike|Large|30/day; 150/week|03/04/2024|Fair|Available
+146|Giant|Road Bike|Large|25/day; 125/week|04/06/2020|New|Rented
+147|Merida|Gravel Bike|Medium|15/day; 75/week|29/07/2024|Damaged|Under Maintenance
+148|Giant|Electric Bike|Large|15/day; 75/week|19/02/2024|Good|Under Maintenance
+149|Bianchi|Hybrid Bike|Small|30/day; 150/week|09/06/2019|New|Under Maintenance
+150|Merida|Mountain Bike|Small|Missing|23/09/2023|Damaged|Under Maintenance
+151|Trek|Gravel Bike|Large|20/day; 100/week|31/08/2019|New|Under Maintenance
+152|Specialized|Electric Bike|Small|10/day; 50/week|09/09/2020|Damaged|Rented
+153|Giant|Mountain Bike|Medium|10/day; 50/week|09/08/2019|Damaged|Under Maintenance
+154|Santa Cruz|Gravel Bike|Small|10/day; 50/week|24/01/2024|New|Rented
+155|Specialized|Gravel Bike|Large|15/day; 75/week|05/09/2024|New|Under Maintenance
+156|Trek|BMX|Small|15/day; 75/week|06/10/2019|Damaged|Under Maintenance
+157|Norco|Road Bike|Large|20/day; 100/week|05/06/2024|Good|Under Maintenance
+158|Merida|Road Bike|Large|25/day; 125/week|08/10/2020|Damaged|Rented
+159|GT|Hybrid Bike|Medium|25/day; 125/week|01/08/2019|Good|Under Maintenance
+160|GT|Gravel Bike|Large|20/day; 100/week|26/06/2021|Damaged|Rented
+161|Santa Cruz|Hybrid Bike|Large|15/day; 75/week|30/05/2024|Damaged|Available
+162|GT|Gravel Bike|Large|20/day; 100/week|27/11/2023|New|Available
+163|Norco|Hybrid Bike|Medium|30/day; 150/week|22/09/2023|New|Under Maintenance
+164|Norco|Hybrid Bike|Small|10/day; 50/week|31/12/2019|Damaged|Rented
+165|Norco|Gravel Bike|Medium|20/day; 100/week|06/10/2024|Good|Available
+166|Norco|BMX|Medium|20/day; 100/week|25/03/2024|New|Rented
+167|Bianchi|BMX|Large|15/day; 75/week|03/07/2023|New|Available
+168|Norco|Electric Bike|Medium|10/day; 50/week|04/11/2021|Good|Available
+169|Santa Cruz|BMX|Medium|30/day; 150/week|13/12/2023|Good|Rented
+170|Merida|BMX|Large|25/day; 125/week|02/08/2022|New|Rented
+171|Specialized|Mountain Bike|Medium|25/day; 125/week|13/03/2019|Good|Rented
+172|Norco|Gravel Bike|Medium|15/day; 75/week|06/10/2020|New|Rented
+173|Santa Cruz|Road Bike|Medium|20/day; 100/week|28/10/2023|New|Rented
+174|Scott|BMX|Small|20/day; 100/week|30/06/2022|New|Rented
+175|Bianchi|Road Bike|Small|25/day; 125/week|09/11/2024|Damaged|Under Maintenance
+176|GT|Gravel Bike|Large|20/day; 100/week|30/09/2023|New|Rented
+177|Giant|Road Bike|Small|20/day; 100/week|05/10/2021|Damaged|Under Maintenance
+178|Santa Cruz|BMX|Medium|15/day; 75/week|26/10/2024|New|Available
+179|Merida|BMX|Large|15/day; 75/week|02/11/2023|Damaged|Rented
+180|Bianchi|Electric Bike|Medium|20/day; 100/week|15/11/2021|Fair|Available
+181|Bianchi|Hybrid Bike|Small|15/day; 75/week|19/08/2021|Fair|Rented
+182|Cannondale|Electric Bike|Large|15/day; 75/week|20/05/2019|New|Under Maintenance
+183|Santa Cruz|Gravel Bike|Small|15/day; 75/week|14/06/2024|New|Rented
+184|Cannondale|Hybrid Bike|Large|15/day; 75/week|04/04/2020|Damaged|Under Maintenance
+185|Trek|Electric Bike|Medium|10/day; 50/week|14/03/2023|Damaged|Available
+186|Scott|Hybrid Bike|Large|20/day; 100/week|14/10/2019|Damaged|Rented
+187|Scott|Road Bike|Small|25/day; 125/week|05/09/2021|Fair|Under Maintenance
+188|Giant|Mountain Bike|Large|15/day; 75/week|19/03/2024|New|Rented
+189|Norco|Gravel Bike|Large|10/day; 50/week|17/08/2019|New|Available
+190|Scott|BMX|Small|30/day; 150/week|05/03/2019|Good|Available
+191|Bianchi|BMX|Small|25/day; 125/week|28/03/2024|Fair|Under Maintenance
+192|Giant|Gravel Bike|Medium|20/day; 100/week|23/12/2021|Good|Under Maintenance
+193|Santa Cruz|Hybrid Bike|Large|Missing|11/07/2024|Damaged|Under Maintenance
+194|Santa Cruz|Hybrid Bike|Large|20/day; 100/week|18/10/2023|New|Rented
+195|Specialized|Gravel Bike|Large|30/day; 150/week|12/03/2024|Fair|Rented
+196|Trek|Electric Bike|Small|25/day; 125/week|03/08/2019|Fair|Available
+197|Giant|Electric Bike|Medium|15/day; 75/week|04/07/2024|New|Rented
+198|GT|Road Bike|Small|20/day; 100/week|18/07/2023|Good|Under Maintenance
+199|Scott|Hybrid Bike|Medium|30/day; 150/week|22/12/2021|Good|Available
+200|Scott|Mountain Bike|Large|30/day; 150/week|02/01/2023|Damaged|Under Maintenance
+201|Bianchi|Road Bike|Large|10/day; 50/week|05/03/2021|Damaged|Under Maintenance
+202|Trek|BMX|Small|25/day; 125/week|07/12/2022|New|Available
+203|GT|Mountain Bike|Small|20/day; 100/week|24/11/2020|Damaged|Available
+204|Cannondale|Electric Bike|Small|10/day; 50/week|31/07/2019|New|Under Maintenance
+205|Santa Cruz|Mountain Bike|Medium|15/day; 75/week|20/06/2023|Fair|Available
+206|Bianchi|Gravel Bike|Large|25/day; 125/week|07/12/2023|Good|Available
+207|Santa Cruz|Road Bike|Medium|25/day; 125/week|05/06/2023|Good|Rented
+208|Norco|Road Bike|Medium|Missing|21/04/2023|Good|Under Maintenance
+209|Specialized|Gravel Bike|Small|25/day; 125/week|02/08/2022|Good|Available
+210|Norco|BMX|Medium|25/day; 125/week|27/02/2024|Good|Available
+211|Cannondale|Mountain Bike|Medium|25/day; 125/week|16/03/2024|Damaged|Available
+212|Cannondale|Mountain Bike|Small|30/day; 150/week|03/11/2021|Damaged|Rented
+213|Specialized|BMX|Small|20/day; 100/week|24/12/2024|Good|Available
+214|Santa Cruz|Mountain Bike|Medium|25/day; 125/week|15/01/2024|Damaged|Available
+215|Norco|BMX|Large|15/day; 75/week|02/12/2021|Good|Under Maintenance
+216|Bianchi|Electric Bike|Small|25/day; 125/week|31/01/2019|Fair|Under Maintenance
+217|Santa Cruz|Gravel Bike|Small|30/day; 150/week|13/05/2019|Fair|Available
+218|Santa Cruz|Road Bike|Small|30/day; 150/week|08/11/2024|New|Rented
+219|Norco|Road Bike|Small|20/day; 100/week|24/10/2022|New|Available
+220|Norco|Road Bike|Small|30/day; 150/week|11/05/2020|Damaged|Under Maintenance
+221|Santa Cruz|Electric Bike|Medium|20/day; 100/week|11/11/2022|New|Under Maintenance
+222|Santa Cruz|Hybrid Bike|Medium|30/day; 150/week|06/11/2020|Good|Under Maintenance
+223|Scott|BMX|Large|25/day; 125/week|13/10/2020|Fair|Rented
+224|Giant|Road Bike|Medium|20/day; 100/week|21/03/2023|Good|Under Maintenance
+225|Santa Cruz|Road Bike|Medium|25/day; 125/week|22/08/2022|Fair|Rented
+226|Cannondale|BMX|Large|20/day; 100/week|13/11/2022|Fair|Available
+227|Trek|BMX|Small|30/day; 150/week|31/12/2023|Good|Rented
+228|Cannondale|Road Bike|Medium|20/day; 100/week|17/04/2020|New|Available
+229|Scott|BMX|Medium|10/day; 50/week|14/03/2024|New|Rented
+230|Norco|Gravel Bike|Small|20/day; 100/week|11/09/2022|Fair|Rented
+231|Cannondale|Gravel Bike|Small|25/day; 125/week|21/08/2022|Fair|Available
+232|Cannondale|Electric Bike|Small|10/day; 50/week|15/03/2023|Fair|Available
+233|Trek|BMX|Medium|10/day; 50/week|22/06/2019|Good|Available
+234|Giant|BMX|Large|10/day; 50/week|14/11/2021|New|Available
+235|Trek|Hybrid Bike|Small|25/day; 125/week|15/07/2023|Damaged|Rented
+236|Trek|Hybrid Bike|Small|20/day; 100/week|10/03/2021|Fair|Under Maintenance
+237|Merida|Gravel Bike|Small|30/day; 150/week|14/05/2020|Damaged|Rented
+238|Merida|Gravel Bike|Medium|20/day; 100/week|07/12/2019|Damaged|Rented
+239|Merida|Electric Bike|Large|15/day; 75/week|16/04/2020|Damaged|Available
+240|Norco|BMX|Small|25/day; 125/week|15/06/2023|Fair|Available
+241|Bianchi|Hybrid Bike|Small|30/day; 150/week|20/07/2023|New|Available
+242|Norco|Hybrid Bike|Medium|10/day; 50/week|02/03/2020|Good|Rented
+243|Trek|Hybrid Bike|Small|25/day; 125/week|05/10/2019|Damaged|Rented
+244|Trek|Mountain Bike|Large|15/day; 75/week|28/06/2024|Fair|Rented
+245|Trek|Hybrid Bike|Large|25/day; 125/week|19/06/2024|Damaged|Under Maintenance
+246|Giant|BMX|Large|25/day; 125/week|19/07/2019|Damaged|Under Maintenance
+247|Norco|Gravel Bike|Small|25/day; 125/week|20/10/2023|New|Under Maintenance
+248|Bianchi|Gravel Bike|Medium|Missing|19/09/2022|Fair|Under Maintenance
+249|Specialized|Electric Bike|Small|15/day; 75/week|19/01/2023|Good|Rented
+250|Giant|Electric Bike|Small|Missing|07/05/2021|Damaged|Under Maintenance
+251|Santa Cruz|Electric Bike|Medium|Missing|27/11/2024|Damaged|Rented
+252|Merida|Electric Bike|Medium|20/day; 100/week|28/04/2023|Fair|Rented
+253|Bianchi|Electric Bike|Medium|25/day; 125/week|17/11/2024|Damaged|Under Maintenance
+254|Santa Cruz|Hybrid Bike|Large|10/day; 50/week|07/07/2019|Damaged|Rented
+255|Norco|Electric Bike|Small|20/day; 100/week|12/06/2020|New|Under Maintenance
+256|Giant|Hybrid Bike|Large|25/day; 125/week|26/04/2020|New|Rented
+257|Specialized|Hybrid Bike|Medium|25/day; 125/week|04/09/2019|Good|Rented
+258|Santa Cruz|Gravel Bike|Medium|10/day; 50/week|03/03/2020|New|Under Maintenance
+259|GT|Road Bike|Large|Missing|02/03/2022|Fair|Under Maintenance
+260|Bianchi|Gravel Bike|Small|30/day; 150/week|27/11/2021|Fair|Available
+261|Giant|Road Bike|Large|30/day; 150/week|28/06/2022|New|Rented
+262|GT|BMX|Large|20/day; 100/week|29/04/2021|Fair|Available
+263|Norco|Electric Bike|Large|10/day; 50/week|07/03/2021|Damaged|Rented
+264|GT|Gravel Bike|Small|10/day; 50/week|28/09/2019|New|Available
+265|Norco|Hybrid Bike|Small|20/day; 100/week|21/05/2022|Good|Available
+266|Scott|Gravel Bike|Medium|15/day; 75/week|25/01/2023|Fair|Rented
+267|Merida|Mountain Bike|Small|30/day; 150/week|12/07/2023|Damaged|Under Maintenance
+268|Specialized|BMX|Medium|25/day; 125/week|01/06/2024|Damaged|Rented
+269|Bianchi|Gravel Bike|Small|30/day; 150/week|02/09/2022|Damaged|Rented
+270|Cannondale|Gravel Bike|Small|25/day; 125/week|23/12/2019|Good|Under Maintenance
+271|Giant|Mountain Bike|Medium|15/day; 75/week|04/03/2022|Fair|Rented
+272|Cannondale|Road Bike|Medium|25/day; 125/week|01/05/2022|New|Rented
+273|Trek|Road Bike|Small|25/day; 125/week|12/06/2021|Fair|Under Maintenance
+274|Giant|Electric Bike|Large|25/day; 125/week|18/05/2022|Good|Available
+275|Cannondale|Electric Bike|Medium|15/day; 75/week|28/10/2021|Damaged|Rented
+276|Scott|BMX|Medium|25/day; 125/week|01/11/2019|New|Rented
+277|Norco|Mountain Bike|Small|30/day; 150/week|12/03/2020|Damaged|Available
+278|Specialized|Electric Bike|Medium|25/day; 125/week|09/02/2022|New|Under Maintenance
+279|Norco|Gravel Bike|Large|15/day; 75/week|14/07/2019|Fair|Under Maintenance
+280|Scott|Mountain Bike|Small|25/day; 125/week|10/01/2022|New|Available
+281|Merida|Road Bike|Large|20/day; 100/week|17/05/2020|Good|Available
+282|Cannondale|Mountain Bike|Large|15/day; 75/week|08/09/2020|Good|Rented
+283|Bianchi|BMX|Large|20/day; 100/week|05/03/2020|New|Available
+284|Scott|BMX|Small|10/day; 50/week|17/01/2021|Good|Available
+285|Scott|Road Bike|Small|25/day; 125/week|29/12/2021|Damaged|Under Maintenance
+286|Merida|BMX|Small|15/day; 75/week|16/06/2022|New|Rented
+287|Trek|Electric Bike|Large|20/day; 100/week|16/06/2024|Damaged|Available
+288|Cannondale|Gravel Bike|Small|15/day; 75/week|31/12/2022|New|Available
+289|Santa Cruz|Electric Bike|Small|10/day; 50/week|05/03/2020|New|Available
+290|Santa Cruz|Gravel Bike|Small|20/day; 100/week|23/07/2023|Good|Available
+291|Bianchi|Hybrid Bike|Small|25/day; 125/week|03/05/2020|Good|Rented
+292|Cannondale|BMX|Medium|Missing|12/01/2019|Fair|Rented
+293|Merida|Road Bike|Small|25/day; 125/week|27/07/2020|Good|Available
+294|Cannondale|Gravel Bike|Large|30/day; 150/week|18/09/2024|Good|Under Maintenance
+295|Scott|Mountain Bike|Medium|15/day; 75/week|18/02/2020|Good|Under Maintenance
+296|Cannondale|Hybrid Bike|Medium|10/day; 50/week|31/01/2020|Good|Under Maintenance
+297|Norco|Electric Bike|Large|15/day; 75/week|16/12/2024|New|Rented
+298|Specialized|Hybrid Bike|Medium|15/day; 75/week|09/07/2021|Good|Rented
+299|Giant|Gravel Bike|Medium|15/day; 75/week|19/06/2023|Damaged|Under Maintenance
+300|Scott|Road Bike|Medium|10/day; 50/week|14/08/2022|Fair|Under Maintenance
+301|Cannondale|Gravel Bike|Large|30/day; 150/week|24/10/2022|Good|Rented
+302|Trek|Gravel Bike|Medium|25/day; 125/week|24/02/2023|Good|Rented
+303|Specialized|BMX|Medium|10/day; 50/week|24/10/2023|Damaged|Rented
+304|Santa Cruz|Road Bike|Large|30/day; 150/week|07/04/2019|Damaged|Rented
+305|GT|BMX|Medium|30/day; 150/week|27/12/2020|Good|Under Maintenance
+306|Merida|Electric Bike|Large|20/day; 100/week|22/03/2022|Damaged|Available
+307|Specialized|Electric Bike|Large|30/day; 150/week|27/03/2019|New|Rented
+308|Scott|BMX|Medium|20/day; 100/week|11/02/2024|Damaged|Under Maintenance
+309|Merida|Gravel Bike|Medium|25/day; 125/week|30/01/2021|New|Under Maintenance
+310|Santa Cruz|BMX|Small|10/day; 50/week|18/04/2020|Fair|Rented
+311|Norco|Hybrid Bike|Small|30/day; 150/week|09/09/2024|Damaged|Available
+312|GT|BMX|Large|10/day; 50/week|28/01/2023|Good|Rented
+313|GT|Electric Bike|Medium|30/day; 150/week|23/05/2024|New|Available
+314|Bianchi|Hybrid Bike|Small|20/day; 100/week|12/03/2019|Damaged|Under Maintenance
+315|Trek|Electric Bike|Large|20/day; 100/week|30/11/2020|New|Under Maintenance
+316|Trek|Electric Bike|Large|20/day; 100/week|08/06/2021|Damaged|Available
+317|Scott|BMX|Large|10/day; 50/week|26/06/2019|Damaged|Available
+318|Bianchi|Gravel Bike|Small|20/day; 100/week|13/09/2023|New|Under Maintenance
+319|Scott|Mountain Bike|Large|30/day; 150/week|29/05/2019|Fair|Available
+320|Specialized|Road Bike|Large|15/day; 75/week|12/11/2024|New|Under Maintenance
+321|Santa Cruz|BMX|Large|25/day; 125/week|01/08/2024|New|Rented
+322|Merida|BMX|Large|10/day; 50/week|02/09/2024|New|Under Maintenance
+323|Giant|Road Bike|Medium|10/day; 50/week|28/03/2024|Damaged|Available
+324|GT|Road Bike|Small|20/day; 100/week|31/05/2023|Damaged|Available
+325|Merida|BMX|Medium|25/day; 125/week|17/05/2020|Good|Rented
+326|Bianchi|Electric Bike|Large|20/day; 100/week|13/07/2019|New|Available
+327|Giant|Road Bike|Small|10/day; 50/week|11/02/2021|Damaged|Rented
+328|Bianchi|Electric Bike|Medium|30/day; 150/week|24/08/2023|Damaged|Rented
+329|Cannondale|Road Bike|Medium|15/day; 75/week|10/09/2022|Good|Available
+330|Cannondale|Mountain Bike|Small|30/day; 150/week|25/07/2019|Good|Under Maintenance
+331|Santa Cruz|Hybrid Bike|Medium|10/day; 50/week|18/01/2020|New|Under Maintenance
+332|Trek|Gravel Bike|Large|20/day; 100/week|23/08/2021|Fair|Rented
+333|Merida|Road Bike|Small|Missing|24/04/2023|New|Under Maintenance
+334|Norco|Road Bike|Medium|15/day; 75/week|22/04/2024|New|Rented
+335|Specialized|Gravel Bike|Large|15/day; 75/week|20/03/2022|Good|Available
+336|Norco|Mountain Bike|Large|15/day; 75/week|30/11/2024|Good|Under Maintenance
+337|Cannondale|Hybrid Bike|Medium|15/day; 75/week|06/05/2024|Damaged|Available
+338|GT|Hybrid Bike|Medium|30/day; 150/week|13/09/2021|Fair|Under Maintenance
+339|Trek|Road Bike|Medium|Missing|05/02/2020|Fair|Rented
+340|Scott|Hybrid Bike|Large|30/day; 150/week|22/02/2023|Fair|Rented
+341|GT|BMX|Medium|15/day; 75/week|16/12/2023|Fair|Available
+342|Trek|Hybrid Bike|Small|30/day; 150/week|12/01/2023|Damaged|Under Maintenance
+343|Santa Cruz|Electric Bike|Medium|30/day; 150/week|23/07/2019|Fair|Rented
+344|Trek|Electric Bike|Medium|15/day; 75/week|04/12/2024|Fair|Under Maintenance
+345|Cannondale|Electric Bike|Medium|20/day; 100/week|16/05/2019|Good|Rented
+346|Trek|Hybrid Bike|Medium|Missing|25/02/2023|Good|Under Maintenance
+347|Scott|Electric Bike|Large|10/day; 50/week|15/03/2020|Good|Under Maintenance
+348|Giant|Road Bike|Medium|25/day; 125/week|13/10/2024|Fair|Rented
+349|Santa Cruz|BMX|Medium|20/day; 100/week|13/08/2020|Damaged|Under Maintenance
+350|Trek|Gravel Bike|Small|25/day; 125/week|14/07/2021|New|Under Maintenance
+351|Norco|Road Bike|Small|15/day; 75/week|30/10/2021|Good|Available
+352|Bianchi|Road Bike|Large|30/day; 150/week|25/02/2019|Damaged|Available
+353|Santa Cruz|Mountain Bike|Medium|30/day; 150/week|05/09/2022|Damaged|Available
+354|Santa Cruz|Road Bike|Small|30/day; 150/week|30/03/2024|Fair|Under Maintenance
+355|Norco|BMX|Medium|20/day; 100/week|11/04/2022|Damaged|Rented
+356|Trek|Gravel Bike|Small|25/day; 125/week|21/05/2022|Good|Rented
+357|Cannondale|Mountain Bike|Medium|30/day; 150/week|18/05/2019|Damaged|Available
+358|GT|Gravel Bike|Large|30/day; 150/week|11/12/2024|Fair|Available
+359|Trek|Electric Bike|Large|15/day; 75/week|16/02/2020|New|Under Maintenance
+360|Merida|Gravel Bike|Small|15/day; 75/week|26/07/2019|Damaged|Under Maintenance
+361|GT|Road Bike|Medium|20/day; 100/week|09/02/2020|Damaged|Under Maintenance
+362|Giant|BMX|Medium|25/day; 125/week|29/06/2021|Damaged|Rented
+363|Bianchi|Gravel Bike|Small|20/day; 100/week|04/01/2022|Fair|Available
+364|Giant|BMX|Large|30/day; 150/week|04/01/2022|Damaged|Under Maintenance
+365|Bianchi|Gravel Bike|Small|20/day; 100/week|19/10/2019|New|Under Maintenance
+366|Specialized|Hybrid Bike|Small|20/day; 100/week|05/06/2023|Fair|Available
+367|Specialized|Road Bike|Small|20/day; 100/week|14/03/2020|Damaged|Rented
+368|Cannondale|Mountain Bike|Small|30/day; 150/week|18/10/2024|Good|Rented
+369|Scott|Electric Bike|Small|10/day; 50/week|16/06/2019|Damaged|Under Maintenance
+370|Cannondale|Mountain Bike|Medium|15/day; 75/week|07/06/2019|Damaged|Under Maintenance
+371|Bianchi|Mountain Bike|Small|15/day; 75/week|13/12/2021|Damaged|Available
+372|Bianchi|Road Bike|Small|15/day; 75/week|16/11/2022|New|Under Maintenance
+373|Giant|BMX|Small|20/day; 100/week|22/07/2021|Fair|Under Maintenance
+374|Cannondale|Hybrid Bike|Large|20/day; 100/week|16/12/2024|Good|Available
+375|Norco|Gravel Bike|Medium|15/day; 75/week|04/10/2019|New|Rented
+376|Scott|Electric Bike|Medium|20/day; 100/week|30/08/2020|Good|Available
+377|GT|Gravel Bike|Large|20/day; 100/week|02/05/2024|Damaged|Available
+378|Trek|Electric Bike|Medium|20/day; 100/week|01/08/2024|Damaged|Under Maintenance
+379|Scott|BMX|Medium|15/day; 75/week|04/09/2023|Damaged|Rented
+380|GT|Road Bike|Medium|10/day; 50/week|23/05/2023|Damaged|Rented
+381|Cannondale|Mountain Bike|Small|25/day; 125/week|24/04/2022|Good|Rented
+382|Giant|Mountain Bike|Medium|20/day; 100/week|14/05/2023|New|Available
+383|Norco|Road Bike|Small|20/day; 100/week|30/01/2023|Good|Available
+384|Santa Cruz|Gravel Bike|Small|30/day; 150/week|26/07/2023|Good|Available
+385|Merida|Hybrid Bike|Medium|30/day; 150/week|20/03/2019|Fair|Available
+386|Santa Cruz|BMX|Large|20/day; 100/week|04/11/2022|Damaged|Under Maintenance
+387|Bianchi|Mountain Bike|Medium|10/day; 50/week|22/03/2020|New|Rented
+388|Bianchi|BMX|Medium|25/day; 125/week|15/08/2023|Fair|Under Maintenance
+389|Giant|Mountain Bike|Medium|30/day; 150/week|11/05/2023|New|Rented
+390|GT|Electric Bike|Medium|30/day; 150/week|15/11/2019|Fair|Available
+391|Santa Cruz|Hybrid Bike|Large|20/day; 100/week|10/05/2024|Damaged|Available
+392|GT|Gravel Bike|Medium|25/day; 125/week|18/02/2019|New|Under Maintenance
+393|Specialized|Road Bike|Small|25/day; 125/week|01/06/2024|Fair|Rented
+394|Merida|Mountain Bike|Medium|30/day; 150/week|31/03/2019|Good|Under Maintenance
+395|Cannondale|Gravel Bike|Small|15/day; 75/week|13/02/2020|Good|Available
+396|Giant|Road Bike|Small|20/day; 100/week|07/06/2022|New|Under Maintenance
+397|Scott|Electric Bike|Medium|20/day; 100/week|30/01/2023|Damaged|Available
+398|Trek|Road Bike|Large|30/day; 150/week|25/12/2021|New|Under Maintenance
+399|Cannondale|Hybrid Bike|Large|25/day; 125/week|18/02/2019|Fair|Available
+400|Merida|Hybrid Bike|Large|15/day; 75/week|03/04/2019|Good|Under Maintenance
+401|GT|Road Bike|Medium|20/day; 100/week|18/02/2024|Fair|Under Maintenance
+402|Cannondale|Gravel Bike|Medium|10/day; 50/week|16/12/2020|Fair|Rented
+403|Cannondale|BMX|Large|30/day; 150/week|06/06/2021|Good|Under Maintenance
+404|Santa Cruz|Mountain Bike|Small|30/day; 150/week|27/04/2024|New|Under Maintenance
+405|Bianchi|Hybrid Bike|Large|10/day; 50/week|31/12/2023|Damaged|Available
+406|Trek|Electric Bike|Large|10/day; 50/week|22/11/2020|Fair|Available
+407|Giant|Road Bike|Large|15/day; 75/week|11/12/2019|Damaged|Rented
+408|Scott|Gravel Bike|Large|15/day; 75/week|15/05/2020|New|Rented
+409|GT|Gravel Bike|Medium|20/day; 100/week|12/03/2019|New|Under Maintenance
+410|Specialized|Mountain Bike|Large|15/day; 75/week|24/05/2020|Damaged|Available
+411|GT|Gravel Bike|Medium|10/day; 50/week|17/06/2024|Fair|Rented
+412|Santa Cruz|Mountain Bike|Small|30/day; 150/week|21/08/2019|Fair|Available
+413|Scott|Road Bike|Large|20/day; 100/week|20/04/2021|Good|Under Maintenance
+414|Norco|Mountain Bike|Medium|15/day; 75/week|22/05/2021|New|Available
+415|Scott|Mountain Bike|Medium|10/day; 50/week|13/10/2021|Good|Under Maintenance
+416|Specialized|Mountain Bike|Medium|20/day; 100/week|02/10/2022|Good|Available
+417|Merida|BMX|Large|30/day; 150/week|30/11/2020|Damaged|Under Maintenance
+418|Scott|Hybrid Bike|Large|10/day; 50/week|13/08/2023|New|Rented
+419|Norco|Mountain Bike|Large|15/day; 75/week|09/09/2023|Fair|Available
+420|Giant|Road Bike|Large|25/day; 125/week|01/11/2022|New|Available
+421|Giant|BMX|Large|25/day; 125/week|26/10/2021|Fair|Available
+422|Merida|Mountain Bike|Large|30/day; 150/week|16/03/2019|New|Rented
+423|GT|Road Bike|Medium|15/day; 75/week|12/08/2020|Good|Available
+424|Giant|Electric Bike|Small|10/day; 50/week|16/10/2022|New|Available
+425|Trek|Road Bike|Medium|30/day; 150/week|01/11/2021|Fair|Rented
+426|Santa Cruz|Gravel Bike|Small|15/day; 75/week|03/04/2020|Damaged|Under Maintenance
+427|Norco|BMX|Small|30/day; 150/week|16/09/2023|Fair|Available
+428|Scott|Hybrid Bike|Medium|20/day; 100/week|04/03/2021|Fair|Available
+429|Trek|Hybrid Bike|Large|10/day; 50/week|05/03/2019|Damaged|Available
+430|Trek|Hybrid Bike|Medium|25/day; 125/week|07/06/2023|New|Under Maintenance
+431|Cannondale|Gravel Bike|Large|10/day; 50/week|18/03/2020|Damaged|Rented
+432|GT|Gravel Bike|Small|15/day; 75/week|26/11/2024|Damaged|Rented
+433|Merida|Mountain Bike|Large|20/day; 100/week|17/08/2020|New|Available
+434|Trek|BMX|Small|30/day; 150/week|23/12/2023|Good|Under Maintenance
+435|Santa Cruz|Road Bike|Large|10/day; 50/week|03/11/2022|New|Available
+436|Scott|Mountain Bike|Medium|30/day; 150/week|19/06/2020|Fair|Available
+437|Specialized|BMX|Small|20/day; 100/week|16/08/2024|Fair|Under Maintenance
+438|Scott|Hybrid Bike|Medium|15/day; 75/week|17/11/2024|Fair|Rented
+439|Scott|BMX|Small|25/day; 125/week|27/12/2023|Damaged|Under Maintenance
+440|Cannondale|Gravel Bike|Small|15/day; 75/week|08/07/2020|New|Under Maintenance
+441|Specialized|Electric Bike|Large|25/day; 125/week|28/06/2023|Good|Under Maintenance
+442|Cannondale|Road Bike|Large|25/day; 125/week|13/11/2020|Good|Under Maintenance
+443|Specialized|Electric Bike|Medium|15/day; 75/week|31/07/2019|Fair|Rented
+444|Scott|Mountain Bike|Large|15/day; 75/week|02/11/2021|New|Under Maintenance
+445|Giant|Road Bike|Small|20/day; 100/week|05/02/2019|Damaged|Available
+446|Trek|BMX|Large|20/day; 100/week|17/11/2023|Damaged|Rented
+447|Merida|Gravel Bike|Medium|30/day; 150/week|11/12/2023|New|Available
+448|Santa Cruz|Gravel Bike|Small|25/day; 125/week|01/01/2023|New|Under Maintenance
+449|Merida|Electric Bike|Small|15/day; 75/week|27/01/2022|Good|Under Maintenance
+450|Giant|Electric Bike|Small|Missing|13/12/2023|Fair|Available
+451|Giant|Hybrid Bike|Large|30/day; 150/week|22/11/2023|Good|Available
+452|GT|Hybrid Bike|Small|20/day; 100/week|24/09/2019|Damaged|Under Maintenance
+453|Santa Cruz|Mountain Bike|Medium|30/day; 150/week|28/11/2023|Good|Under Maintenance
+454|Cannondale|Electric Bike|Large|25/day; 125/week|09/03/2024|Good|Available
+455|GT|BMX|Small|25/day; 125/week|17/03/2021|New|Rented
+456|Trek|Mountain Bike|Large|30/day; 150/week|02/12/2024|Damaged|Rented
+457|Norco|Electric Bike|Small|30/day; 150/week|08/02/2022|Fair|Under Maintenance
+458|Norco|BMX|Small|15/day; 75/week|26/02/2023|New|Under Maintenance
+459|Santa Cruz|Gravel Bike|Small|Missing|22/02/2024|Fair|Available
+460|Norco|BMX|Large|25/day; 125/week|13/08/2022|Fair|Rented
+461|Bianchi|Mountain Bike|Large|Missing|25/02/2021|Good|Available
+462|GT|BMX|Medium|25/day; 125/week|27/09/2022|Fair|Available
+463|Trek|BMX|Medium|15/day; 75/week|06/02/2019|Fair|Available
+464|GT|Road Bike|Large|20/day; 100/week|02/08/2020|Damaged|Under Maintenance
+465|Giant|Hybrid Bike|Medium|25/day; 125/week|25/11/2021|Good|Available
+466|Santa Cruz|Road Bike|Large|20/day; 100/week|06/09/2020|Fair|Rented
+467|Cannondale|Gravel Bike|Large|15/day; 75/week|01/10/2023|Good|Rented
+468|Giant|Hybrid Bike|Small|30/day; 150/week|29/04/2022|Good|Rented
+469|Norco|BMX|Small|10/day; 50/week|09/10/2019|New|Rented
+470|GT|Hybrid Bike|Small|15/day; 75/week|05/11/2019|Damaged|Available
+471|Scott|Road Bike|Medium|25/day; 125/week|23/02/2021|Good|Rented
+472|Giant|Hybrid Bike|Small|25/day; 125/week|22/01/2024|Fair|Under Maintenance
+473|Scott|Electric Bike|Medium|30/day; 150/week|19/12/2023|Damaged|Available
+474|Giant|Gravel Bike|Large|20/day; 100/week|28/08/2020|New|Available
+475|Scott|Hybrid Bike|Medium|15/day; 75/week|31/03/2022|New|Under Maintenance
+476|Scott|Mountain Bike|Medium|15/day; 75/week|10/06/2021|Fair|Available
+477|GT|Hybrid Bike|Large|15/day; 75/week|14/08/2021|New|Rented
+478|Merida|BMX|Medium|10/day; 50/week|01/02/2023|Damaged|Rented
+479|Santa Cruz|Hybrid Bike|Large|25/day; 125/week|08/04/2024|Fair|Under Maintenance
+480|Norco|Hybrid Bike|Medium|15/day; 75/week|05/06/2019|Damaged|Available
+481|Scott|Road Bike|Medium|30/day; 150/week|04/09/2019|Fair|Available
+482|Norco|Road Bike|Large|30/day; 150/week|30/07/2022|Fair|Rented
+483|Norco|BMX|Large|25/day; 125/week|19/12/2023|Fair|Under Maintenance
+484|Cannondale|Mountain Bike|Large|15/day; 75/week|27/07/2024|New|Rented
+485|Bianchi|Gravel Bike|Medium|25/day; 125/week|07/03/2020|Damaged|Rented
+486|GT|Road Bike|Small|25/day; 125/week|05/08/2023|Good|Under Maintenance
+487|Santa Cruz|Road Bike|Large|30/day; 150/week|22/06/2022|New|Rented
+488|Bianchi|BMX|Large|Missing|14/04/2022|New|Under Maintenance
+489|Trek|Road Bike|Large|20/day; 100/week|21/09/2020|Damaged|Under Maintenance
+490|Scott|Hybrid Bike|Medium|15/day; 75/week|09/08/2022|New|Under Maintenance
+491|Giant|Gravel Bike|Small|20/day; 100/week|14/11/2020|Good|Available
+492|GT|Hybrid Bike|Large|20/day; 100/week|04/01/2022|New|Under Maintenance
+493|Giant|Electric Bike|Small|10/day; 50/week|15/09/2021|Good|Under Maintenance
+494|Specialized|BMX|Medium|25/day; 125/week|16/07/2020|Damaged|Available
+495|Cannondale|Gravel Bike|Small|25/day; 125/week|12/11/2022|Fair|Under Maintenance
+496|Giant|BMX|Large|10/day; 50/week|06/03/2020|Fair|Rented
+497|Specialized|Mountain Bike|Large|20/day; 100/week|26/04/2023|Damaged|Under Maintenance
+498|Santa Cruz|BMX|Large|20/day; 100/week|03/09/2021|Good|Available
+499|Specialized|Electric Bike|Medium|Missing|20/05/2022|Good|Available
+500|Bianchi|BMX|Small|15/day; 75/week|18/12/2021|Damaged|Under Maintenance
