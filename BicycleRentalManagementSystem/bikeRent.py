@@ -3,14 +3,18 @@ import sys
 import os
 import logging
 from datetime import datetime, timedelta
-# Conditional imports for module vs direct execution
+# Import database and search modules
 try:
-    from .database import DatabaseManager
-    from .bikeSearch import BicycleSearch
-except ImportError:
-    # When running directly, use absolute imports
     from database import DatabaseManager
     from bikeSearch import BicycleSearch
+except ImportError:
+    # Fallback for when running as module
+    try:
+        from .database import DatabaseManager
+        from .bikeSearch import BicycleSearch
+    except ImportError:
+        print("Error: Could not import required modules")
+        raise
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

@@ -146,18 +146,18 @@
                             </div>
                             <div>
                                 <div class="fw-bold">Members</div>
-                                <small class="text-success">Active</small>
+                                <small class="text-success" id="dashboard-members">-</small>
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="bg-success rounded-circle p-2 me-3">
-                                <i class="fas fa-shield-alt text-white"></i>
+                            <div class="bg-warning rounded-circle p-2 me-3">
+                                <i class="fas fa-dollar-sign text-white"></i>
                             </div>
                             <div>
-                                <div class="fw-bold">Security</div>
-                                <small class="text-success">Protected</small>
+                                <div class="fw-bold">Revenue</div>
+                                <small class="text-warning" id="dashboard-revenue">-</small>
                             </div>
                         </div>
                     </div>
@@ -218,12 +218,31 @@ $(document).ready(function() {
 });
 
 function loadDashboardStats() {
-    // This would typically make an API call to get real-time stats
-    // For now, we'll simulate with sample data
-    $('#total-bikes').text('24');
-    $('#available-bikes').text('18');
-    $('#rented-bikes').text('4');
-    $('#maintenance-bikes').text('2');
+    // Load real-time statistics from the analytics API
+    $.ajax({
+        url: '/api/analytics/overview',
+        method: 'GET',
+        success: function(response) {
+            if (response.success) {
+                const data = response.data;
+                $('#total-bikes').text(data.total_bikes);
+                $('#available-bikes').text(data.available_bikes);
+                $('#rented-bikes').text(data.rented_bikes);
+                $('#maintenance-bikes').text(data.maintenance_bikes);
+                
+                // Update dashboard analytics
+                $('#dashboard-members').text(data.total_members);
+                $('#dashboard-revenue').text('$' + data.total_revenue.toFixed(2));
+            }
+        },
+        error: function() {
+            // Fallback to sample data if API fails
+            $('#total-bikes').text('24');
+            $('#available-bikes').text('18');
+            $('#rented-bikes').text('4');
+            $('#maintenance-bikes').text('2');
+        }
+    });
 }
 
 function loadRecentRentals() {

@@ -13,22 +13,333 @@
     </div>
 </div>
 
+<!-- Return Form -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-undo me-2"></i>
+                    Process Return
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="returnForm">
+                    <div class="mb-3">
+                        <label for="bicycleId" class="form-label">Bicycle ID *</label>
+                        <input type="number" class="form-control" id="bicycleId" name="bicycleId" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="memberId" class="form-label">Member ID *</label>
+                        <input type="number" class="form-control" id="memberId" name="memberId" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newCondition" class="form-label">New Condition</label>
+                        <select class="form-select" id="newCondition" name="newCondition">
+                            <option value="New">New</option>
+                            <option value="Good" selected>Good</option>
+                            <option value="Fair">Fair</option>
+                            <option value="Damaged">Damaged</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="damageFee" class="form-label">Damage Fee ($)</label>
+                        <input type="number" class="form-control" id="damageFee" name="damageFee" min="0" step="0.01" value="0">
+                        <div class="form-text">Enter 0 if no damage</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check me-2"></i>
+                        Process Return
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Return Information
+                </h5>
+            </div>
+            <div class="card-body">
+                <div id="returnInfo" class="d-none">
+                    <h6>Return Details</h6>
+                    <div class="row">
+                        <div class="col-6">
+                            <strong>Bicycle ID:</strong>
+                            <span id="infoBicycleId"></span>
+                        </div>
+                        <div class="col-6">
+                            <strong>Member ID:</strong>
+                            <span id="infoMemberId"></span>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <strong>Rental Date:</strong>
+                            <span id="infoRentalDate"></span>
+                        </div>
+                        <div class="col-6">
+                            <strong>Return Date:</strong>
+                            <span id="infoReturnDate"></span>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <strong>New Condition:</strong>
+                            <span id="infoNewCondition"></span>
+                        </div>
+                        <div class="col-6">
+                            <strong>Damage Fee:</strong>
+                            <span id="infoDamageFee"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="returnInstructions" class="text-muted">
+                    <p><strong>Instructions:</strong></p>
+                    <ul class="mb-0">
+                        <li>Enter the Bicycle ID and Member ID</li>
+                        <li>Select the new condition of the bicycle</li>
+                        <li>Enter any damage fees if applicable</li>
+                        <li>Click "Process Return" to complete the return</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Currently Rented Bicycles -->
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header bg-warning text-white">
                 <h5 class="mb-0">
-                    <i class="fas fa-info-circle me-2"></i>
-                    Coming Soon
+                    <i class="fas fa-bicycle me-2"></i>
+                    Currently Rented Bicycles
                 </h5>
             </div>
-            <div class="card-body text-center py-5">
-                <i class="fas fa-tools fa-3x text-muted mb-3"></i>
-                <h4>Returns Processing</h4>
-                <p class="text-muted">This feature is currently under development.</p>
-                <p class="text-muted">It will include return processing, condition assessment, and fee calculations.</p>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="rentedBikesTable">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Bicycle ID</th>
+                                <th>Member ID</th>
+                                <th>Rental Date</th>
+                                <th>Brand</th>
+                                <th>Type</th>
+                                <th>Condition</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rentedBikesBody">
+                            <tr>
+                                <td colspan="8" class="text-center text-muted">
+                                    <i class="fas fa-spinner fa-spin me-2"></i>
+                                    Loading rented bicycles...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Return Success Modal -->
+<div class="modal fade" id="returnSuccessModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-check-circle me-2"></i>
+                    Return Processed Successfully
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p id="returnSuccessMessage"></p>
+                <div class="alert alert-info">
+                    <strong>Summary:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>Bicycle status updated to 'Available'</li>
+                        <li>Return date recorded</li>
+                        <li>Any fees have been logged</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Load currently rented bicycles
+    loadRentedBikes();
+    
+    // Handle return form submission
+    $('#returnForm').on('submit', function(e) {
+        e.preventDefault();
+        processReturn();
+    });
+    
+    // Auto-fill form when clicking on a rented bike row
+    $(document).on('click', '.rented-bike-row', function() {
+        const bicycleId = $(this).data('bicycle-id');
+        const memberId = $(this).data('member-id');
+        
+        $('#bicycleId').val(bicycleId);
+        $('#memberId').val(memberId);
+        
+        // Highlight the selected row
+        $('.rented-bike-row').removeClass('table-primary');
+        $(this).addClass('table-primary');
+    });
+});
+
+function loadRentedBikes() {
+    $.ajax({
+        url: '/api/returnable-bikes',
+        method: 'GET',
+        success: function(response) {
+            if (response.success) {
+                displayRentedBikes(response.bikes);
+            } else {
+                $('#rentedBikesBody').html(`
+                    <tr>
+                        <td colspan="8" class="text-center text-danger">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            Error loading rented bicycles: ${response.message}
+                        </td>
+                    </tr>
+                `);
+            }
+        },
+        error: function() {
+            $('#rentedBikesBody').html(`
+                <tr>
+                    <td colspan="8" class="text-center text-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Failed to load rented bicycles
+                    </td>
+                </tr>
+            `);
+        }
+    });
+}
+
+function displayRentedBikes(bikes) {
+    if (bikes.length === 0) {
+        $('#rentedBikesBody').html(`
+            <tr>
+                <td colspan="8" class="text-center text-muted">
+                    <i class="fas fa-info-circle me-2"></i>
+                    No bicycles are currently rented
+                </td>
+            </tr>
+        `);
+        return;
+    }
+    
+    let html = '';
+    bikes.forEach(function(bike) {
+        const [transactionId, bicycleId, memberId, rentalDate, brand, bikeType, condition] = bike;
+        html += `
+            <tr class="rented-bike-row" data-bicycle-id="${bicycleId}" data-member-id="${memberId}" style="cursor: pointer;">
+                <td>${transactionId}</td>
+                <td><strong>#${bicycleId}</strong></td>
+                <td>${memberId}</td>
+                <td>${rentalDate}</td>
+                <td>${brand}</td>
+                <td>${bikeType}</td>
+                <td><span class="badge bg-secondary">${condition}</span></td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary" onclick="selectBike(${bicycleId}, ${memberId})">
+                        <i class="fas fa-mouse-pointer me-1"></i>
+                        Select
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+    
+    $('#rentedBikesBody').html(html);
+}
+
+function selectBike(bicycleId, memberId) {
+    $('#bicycleId').val(bicycleId);
+    $('#memberId').val(memberId);
+    
+    // Highlight the selected row
+    $('.rented-bike-row').removeClass('table-primary');
+    $(`.rented-bike-row[data-bicycle-id="${bicycleId}"][data-member-id="${memberId}"]`).addClass('table-primary');
+}
+
+function processReturn() {
+    const formData = {
+        bicycle_id: $('#bicycleId').val(),
+        member_id: $('#memberId').val(),
+        new_condition: $('#newCondition').val(),
+        damage_fee: parseFloat($('#damageFee').val()) || 0
+    };
+    
+    // Validate form
+    if (!formData.bicycle_id || !formData.member_id) {
+        alert('Please fill in all required fields');
+        return;
+    }
+    
+    // Show loading state
+    const submitBtn = $('#returnForm button[type="submit"]');
+    const originalText = submitBtn.html();
+    submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i>Processing...');
+    submitBtn.prop('disabled', true);
+    
+    $.ajax({
+        url: '/api/return',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(formData),
+        success: function(response) {
+            if (response.success) {
+                // Show success modal
+                $('#returnSuccessMessage').text(response.message);
+                $('#returnSuccessModal').modal('show');
+                
+                // Reset form
+                $('#returnForm')[0].reset();
+                $('#returnInfo').addClass('d-none');
+                $('#returnInstructions').removeClass('d-none');
+                
+                // Reload rented bikes
+                loadRentedBikes();
+                
+                // Remove row highlighting
+                $('.rented-bike-row').removeClass('table-primary');
+            } else {
+                alert('Error: ' + response.message);
+            }
+        },
+        error: function() {
+            alert('Failed to process return. Please try again.');
+        },
+        complete: function() {
+            // Restore button state
+            submitBtn.html(originalText);
+            submitBtn.prop('disabled', false);
+        }
+    });
+}
+</script>
 {% endblock %} 

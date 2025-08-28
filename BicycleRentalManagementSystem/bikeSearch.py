@@ -1,10 +1,14 @@
 import sqlite3  # Import the sqlite3 module
-# Conditional imports for module vs direct execution
+# Import database module
 try:
-    from .database import DatabaseManager
-except ImportError:
-    # When running directly, use absolute imports
     from database import DatabaseManager
+except ImportError:
+    # Fallback for when running as module
+    try:
+        from .database import DatabaseManager
+    except ImportError:
+        print("Error: Could not import DatabaseManager")
+        raise
 
 class BicycleSearch:
     def __init__(self, db_manager):
