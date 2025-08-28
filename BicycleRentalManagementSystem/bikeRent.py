@@ -1,23 +1,35 @@
 import importlib.util
 import sys
 import os
+import logging
 from datetime import datetime, timedelta
 from database import DatabaseManager, BicycleSearch
 
-# Load membershipManager.pyc file
-membership_path = "C:/Users/tw0271/Desktop/BICYCLERENTALMANAGEMENTSYSTEM/BicycleRentalManagementSystem/membershipManager.pyc"
-spec = importlib.util.spec_from_file_location("membershipManager", membership_path)
-membershipManager = importlib.util.module_from_spec(spec)
-sys.modules["membershipManager"] = membershipManager
-spec.loader.exec_module(membershipManager)
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Import functions from membershipManager
-load_memberships = membershipManager.load_memberships
-check_membership = membershipManager.check_membership
-get_rental_limit = membershipManager.get_rental_limit
+# Load membershipManager.pyc file using relative paths
+current_dir = os.path.dirname(os.path.abspath(__file__))
+membership_path = os.path.join(current_dir, "membershipManager.pyc")
 
-# Set working directory for members.txt
-os.chdir("C:/Users/tw0271/Desktop/BICYCLERENTALMANAGEMENTSYSTEM/BicycleRentalManagementSystem")
+if os.path.exists(membership_path):
+    spec = importlib.util.spec_from_file_location("membershipManager", membership_path)
+    membershipManager = importlib.util.module_from_spec(spec)
+    sys.modules["membershipManager"] = membershipManager
+    spec.loader.exec_module(membershipManager)
+
+    # Import functions from membershipManager
+    load_memberships = membershipManager.load_memberships
+    check_membership = membershipManager.check_membership
+    get_rental_limit = membershipManager.get_rental_limit
+else:
+    # Fallback if membershipManager.pyc is not found
+    print("Warning: membershipManager.pyc not found. Some functionality may be limited.")
+    load_memberships = lambda: {}
+    check_membership = lambda member_id, memberships: True
+    get_rental_limit = lambda member_id, memberships: 3
+
+# Note: Working directory should be set by the calling script if needed
 
 class RentalTransactionManager:
     def __init__(self, db_manager):
@@ -34,6 +46,21 @@ class RentalTransactionManager:
             logging.info(f"Logged rental transaction for Bicycle ID: {bicycle_id}, Member ID: {member_id}")
         except Exception as e:
             logging.error(f"Failed to log rental transaction: {e}")
+        finally:
+            self.db_manager.close()
+
+    def get_active_rentals_for_member(self, member_id):
+        """Get the number of active rentals for a member."""
+        self.db_manager.connect()
+        try:
+            cursor = self.db_manager.connection.cursor()
+            cursor.execute('''SELECT COUNT(*) FROM rental_transactions 
+                            WHERE MEMBER_ID = ? AND RETURN_DATE IS NULL''', (member_id,))
+            count = cursor.fetchone()[0]
+            return count
+        except Exception as e:
+            logging.error(f"Failed to get active rentals for member {member_id}: {e}")
+            return 0
         finally:
             self.db_manager.close()
 
